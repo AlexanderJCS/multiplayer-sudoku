@@ -5,13 +5,14 @@
 }
 
 :root {
-    --text-color: #00C49A;
-    --line-color: #9f9f9f;
+    --correct-text-color: #00C49A;
+    --line-color: #bdbdbd;
+    --thick-line-color: #e0e0e0;
     --background: #1d1d1d;
 }
 
 body {
-    color: var(--text-color);
+    color: var(--line-color);
     font-family: "Poppins", sans-serif;
     font-weight: 300;
 }
@@ -48,6 +49,25 @@ h1 {
     user-select: none;
     border-right: 3px solid;
     border-bottom: 3px solid;
+}
+
+.box:nth-child(3n) {
+    border-right: 10px solid;
+    border-color: var(--thick-line-color)
+}
+
+/* this is kinda goob but it works */
+.box:nth-child(27n+18),
+.box:nth-child(27n+19),
+.box:nth-child(27n+20),
+.box:nth-child(27n+21),
+.box:nth-child(27n+22),
+.box:nth-child(27n+23),
+.box:nth-child(27n+24),
+.box:nth-child(27n+25),
+.box:nth-child(27n+26) {
+    border-bottom: 10px solid;
+    border-color: var(--thick-line-color)
 }
 
 .box:nth-child(9n) {
