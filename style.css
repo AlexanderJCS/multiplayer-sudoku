@@ -38,6 +38,13 @@ h1 {
     flex-wrap: wrap;
     margin-top: 40px;
 }
+
+.box.highlight {
+    background-color: red;
+    color: inherit;
+    border-color: inherit;
+}
+
 .box {
     height: 100px;
     width: 100px;
@@ -53,11 +60,9 @@ h1 {
 
 .box:nth-child(3n) {
     border-right: 10px solid;
-    border-color: var(--thick-line-color)
 }
 
 /* this is kinda goob but it works */
-.box:nth-child(27n+18),
 .box:nth-child(27n+19),
 .box:nth-child(27n+20),
 .box:nth-child(27n+21),
@@ -65,9 +70,9 @@ h1 {
 .box:nth-child(27n+23),
 .box:nth-child(27n+24),
 .box:nth-child(27n+25),
-.box:nth-child(27n+26) {
+.box:nth-child(27n+26),
+.box:nth-child(27n+27) {
     border-bottom: 10px solid;
-    border-color: var(--thick-line-color)
 }
 
 .box:nth-child(9n) {
