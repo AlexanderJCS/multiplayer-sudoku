@@ -11,7 +11,7 @@ function boxClicked(e) {
  * Highlights the boxes that are in the same row, column, 3x3 grid, or are the same number as the box with the given id.
  */
 function highlightBoxes(boxID) {
-    console.log(getGridTopLeft(boxID));
+    unhighlightBoxes();
 
     let boxes = Array.from(document.getElementsByClassName("box"));
     let [row, col] = getRowCol(boxID);
@@ -27,6 +27,12 @@ function highlightBoxes(boxID) {
             console.log("highlighting box " + i);
         }
     }
+}
+
+function unhighlightBoxes() {
+    getBoxes().forEach((box) => {
+        box.classList.remove("highlight");
+    });
 }
 
 function getGridTopLeft(boxID) {
