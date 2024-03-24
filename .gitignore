@@ -3,3 +3,5 @@
 *.iml
 *.xml
 .venv
+__pycache__
+*.pyc
