@@ -1,4 +1,5 @@
 sudokuBoard = Array(81).fill(0);
+sudokuBoard = Array.from({length: 81}, () => Math.floor(Math.random() * 10));
 
 
 
@@ -10,16 +11,18 @@ function boxClicked(e) {
  * Highlights the boxes that are in the same row, column, 3x3 grid, or are the same number as the box with the given id.
  */
 function highlightBoxes(boxID) {
+    console.log(getGridTopLeft(boxID));
+
     let boxes = Array.from(document.getElementsByClassName("box"));
     let [row, col] = getRowCol(boxID);
-    let grid = getGridTopLeft(boxID);
+    let gridTopLeft = getGridTopLeft(boxID);
     let num = sudokuBoard[boxID];
 
     for (let i = 0; i < 81; i++) {
         let [row2, col2] = getRowCol(i);
-        let grid2 = getGridTopLeft(boxID);
+        let gridTopLeft2 = getGridTopLeft(i);
 
-        if (row === row2 || col === col2 || grid === grid2 || num === sudokuBoard[i]) {
+        if (row === row2 || col === col2 || num === sudokuBoard[i] || gridTopLeft === gridTopLeft2) {
             boxes[i].classList.add("highlight");
             console.log("highlighting box " + i);
         }
