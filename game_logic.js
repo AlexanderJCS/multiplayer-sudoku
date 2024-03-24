@@ -45,7 +45,6 @@ function getGridTopLeft(boxID) {
 }
 
 function getRowCol(boxID) {
-    let boxes = Array.from(document.getElementsByClassName("box"));
     let row = Math.floor(boxID / 9);
     let col = boxID % 9;
     return [row, col];
