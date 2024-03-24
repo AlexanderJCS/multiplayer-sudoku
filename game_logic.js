@@ -22,9 +22,10 @@ function highlightBoxes(boxID) {
         let [row2, col2] = getRowCol(i);
         let gridTopLeft2 = getGridTopLeft(i);
 
-        if (row === row2 || col === col2 || num === sudokuBoard[i] || gridTopLeft === gridTopLeft2) {
+        if (row === row2 || col === col2 || gridTopLeft === gridTopLeft2) {
             boxes[i].classList.add("highlight");
-            console.log("highlighting box " + i);
+        } if (num === sudokuBoard[i]) {
+            boxes[i].classList.add("superHighlight");
         }
     }
 }
@@ -32,6 +33,7 @@ function highlightBoxes(boxID) {
 function unhighlightBoxes() {
     getBoxes().forEach((box) => {
         box.classList.remove("highlight");
+        box.classList.remove("superHighlight");
     });
 }
 

@@ -8,6 +8,8 @@
     --correct-text-color: #00C49A;
     --line-color: #bdbdbd;
     --thick-line-color: #e0e0e0;
+    --accented-background-color: rgba(66, 39, 73, 0.5);
+    --super-accented-background-color: rgba(77, 24, 108, 0.5);
     --background: #1d1d1d;
 }
 
@@ -40,9 +42,13 @@ h1 {
 }
 
 .box.highlight {
-    background-color: red;
+    background-color: var(--accented-background-color);
     color: inherit;
     border-color: inherit;
+}
+
+.box.superHighlight {
+    background-color: var(--super-accented-background-color);
 }
 
 .box {
