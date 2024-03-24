@@ -46,7 +46,7 @@ function highlightBoxes(boxID) {
 
         if (row === row2 || col === col2 || gridTopLeft === gridTopLeft2) {
             boxes[i].classList.add("highlight");
-        } if (num === sudokuBoard[i]) {
+        } if (num === sudokuBoard[i] && sudokuBoard[i] !== 0) {
             boxes[i].classList.add("superHighlight");
         }
     }
