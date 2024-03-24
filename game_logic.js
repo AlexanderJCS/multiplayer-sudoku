@@ -1,11 +1,33 @@
-sudokuBoard = Array(81).fill(0);
+let sudokuBoard = Array(81).fill(0);
 sudokuBoard = Array.from({length: 81}, () => Math.floor(Math.random() * 10));
-
-
+let selectedBox = -1;
 
 function boxClicked(e) {
-    highlightBoxes(parseInt(e.target.id));
+    selectedBox = parseInt(e.target.id);
+    updateBoard();
 }
+
+
+function onKeyPress(e) {
+    if (selectedBox === -1) {
+        return;
+    }
+
+    if (e.key === "Backspace" || e.key === "Delete") {
+        sudokuBoard[selectedBox] = 0;
+        updateBoard();
+        return;
+    }
+
+    let num = parseInt(e.key);
+    if (isNaN(num) || num < 1 || num > 9) {
+        return;
+    }
+
+    sudokuBoard[selectedBox] = num;
+    updateBoard();
+}
+
 
 /**
  * Highlights the boxes that are in the same row, column, 3x3 grid, or are the same number as the box with the given id.
@@ -30,12 +52,14 @@ function highlightBoxes(boxID) {
     }
 }
 
+
 function unhighlightBoxes() {
     getBoxes().forEach((box) => {
         box.classList.remove("highlight");
         box.classList.remove("superHighlight");
     });
 }
+
 
 function getGridTopLeft(boxID) {
     let [row, col] = getRowCol(boxID);
@@ -44,6 +68,7 @@ function getGridTopLeft(boxID) {
     return gridRow * 9 + gridCol;
 }
 
+
 function getRowCol(boxID) {
     let row = Math.floor(boxID / 9);
     let col = boxID % 9;
@@ -51,8 +76,17 @@ function getRowCol(boxID) {
 }
 
 
+/**
+ * Highlights the boxes and updates the text in each box.
+ */
 function updateBoard() {
-    let boxes = Array.from(document.getElementsByClassName("box"));
+    updateBoxText();
+    highlightBoxes(selectedBox);
+}
+
+
+function updateBoxText() {
+    let boxes = getBoxes();
 
     for (let i = 0; i < boxes.length; i++) {
         if (sudokuBoard[i] !== 0) {
@@ -88,6 +122,8 @@ function init() {
     getBoxes().forEach((box) => {
         box.addEventListener("click", boxClicked);
     })
+
+    document.addEventListener("keydown", onKeyPress);
 }
 
 window.onload = init;
