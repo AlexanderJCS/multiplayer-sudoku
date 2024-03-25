@@ -16,8 +16,6 @@ def create_table(cursor):
 
     :param cursor: The cursor object to use
     """
-    # change the command to say "if not already exists"
-    
     cursor.execute("CREATE TABLE IF NOT EXISTS puzzles (difficulty INTEGER, puzzle TEXT, solution TEXT)")
 
 

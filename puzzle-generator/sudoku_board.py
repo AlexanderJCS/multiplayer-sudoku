@@ -28,6 +28,7 @@ class Board:
             
             original = 0
             
+            # TODO: instead, get a list of the available spaces. shuffle them, then go through them in order and set 0
             while original == 0:
                 y = random.randint(0, len(self.board) - 1)
                 x = random.randint(0, len(self.board[y]) - 1)
