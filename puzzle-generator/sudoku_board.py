@@ -137,11 +137,17 @@ class Board:
         ]
     
     def is_valid(self, x, y, num) -> bool:
-        not_in_row = num not in self.board[y]
-        not_in_col = num not in [row[x] for row in self.board]
-        not_in_subsquare = num not in self.get_subsquare(x, y)
+        in_row = num in self.board[y]
         
-        return not_in_row and not_in_col and not_in_subsquare
+        if in_row:
+            return False
+        
+        in_col = num in [row[x] for row in self.board]
+        
+        if in_col:
+            return False
+
+        return num not in self.get_subsquare(x, y)
     
     def clear(self):
         self.board = [[0 for _ in range(9)] for _ in range(9)]

@@ -54,7 +54,7 @@ def generate_puzzles(cursor):
     
     num_puzzles = 1
     for i in range(num_puzzles):
-        print(f"Generating puzzle {i + 1} / {num_puzzles}: {(i) / num_puzzles * 100:.2f}%")
+        print(f"Generating puzzle {i + 1} / {num_puzzles}: {i / num_puzzles * 100:.2f}%")
         
         b.clear()
         puzzles, solution = b.generate([150, 350, 500])
