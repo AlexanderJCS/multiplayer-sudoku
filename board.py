@@ -1,9 +1,9 @@
+import puzzle_loader as pl
 
 
 class Board:
     def __init__(self):
-        self.correct_board = [1] * 81
-        self.board = [0] * 81
+        self.board, self.correct_board = pl.get_random_puzzle(150)
     
     def update_from_request(self, request) -> None:
         """
