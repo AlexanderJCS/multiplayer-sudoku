@@ -5,7 +5,14 @@ let socket = io.connect("http://localhost:5000");
 
 
 function boxClicked(e) {
-    selectedBox = parseInt(e.target.id);
+    let toSelect = parseInt(e.target.id);
+
+    if (selectedBox === toSelect) {  // unselect box if it's already selected
+        selectedBox = -1;
+    } else {
+        selectedBox = toSelect;
+    }
+
     updateBoard();
 }
 
@@ -63,9 +70,9 @@ function highlightBoxes(boxID) {
         let [row2, col2] = getRowCol(i);
         let gridTopLeft2 = getGridTopLeft(i);
 
-        if (row === row2 || col === col2 || gridTopLeft === gridTopLeft2) {
+        if ((row === row2 || col === col2 || gridTopLeft === gridTopLeft2) && i !== boxID) {
             boxes[i].classList.add("highlight");
-        } if (num === sudokuBoard[i] && sudokuBoard[i] !== 0) {
+        } if (num === sudokuBoard[i] && sudokuBoard[i] !== 0 || i === boxID) {
             boxes[i].classList.add("superHighlight");
         }
     }
