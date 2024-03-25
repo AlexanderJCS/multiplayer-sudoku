@@ -1,8 +1,8 @@
 let sudokuBoard = Array(81).fill(0);
-sudokuBoard = [2, 6, 4, 3, 9, 1, 7, 8, 5, 3, 1, 5, 6, 7, 0, 9, 2, 0, 7, 9, 8, 4, 2, 5, 6, 3, 1, 4, 8, 3, 2, 1, 0, 5, 9, 6, 9, 0, 6, 0, 4, 3, 2, 0, 8, 5, 0, 1, 8, 6, 9, 3, 4, 7, 6, 3, 2, 0, 5, 0, 8, 7, 9, 0, 5, 7, 9, 8, 2, 4, 6, 3, 8, 4, 9, 7, 3, 6, 1, 5, 2];
-let correctBoard = [2, 6, 4, 3, 9, 1, 7, 8, 5, 3, 1, 5, 6, 7, 8, 9, 2, 4, 7, 9, 8, 4, 2, 5, 6, 3, 1, 4, 8, 3, 2, 1, 7, 5, 9, 6, 9, 7, 6, 5, 4, 3, 2, 1, 8, 5, 2, 1, 8, 6, 9, 3, 4, 7, 6, 3, 2, 1, 5, 4, 8, 7, 9, 1, 5, 7, 9, 8, 2, 4, 6, 3, 8, 4, 9, 7, 3, 6, 1, 5, 2];
+let correctBoard = Array(81).fill(0);
 let selectedBox = -1;
 let socket = io.connect("http://localhost:5000");
+
 
 function boxClicked(e) {
     selectedBox = parseInt(e.target.id);
@@ -11,6 +11,7 @@ function boxClicked(e) {
 
 
 function onKeyPress(e) {
+    // TODO: refactor some of this - put this in a separate function
     if (selectedBox === -1) {
         return;
     }
@@ -71,6 +72,9 @@ function highlightBoxes(boxID) {
 }
 
 
+/**
+ * Removes the highlight and superHighlight classes from all the boxes.
+ */
 function unhighlightBoxes() {
     getBoxes().forEach((box) => {
         box.classList.remove("highlight");
@@ -104,6 +108,9 @@ function updateBoard() {
 }
 
 
+/**
+ * Updates the text in each box based on the current state of the board.
+ */
 function updateBoxText() {
     let boxes = getBoxes();
 
@@ -117,6 +124,9 @@ function updateBoxText() {
 }
 
 
+/**
+ * Used at initialization. Generates the 9x9 grid of boxes.
+ */
 function genGrid() {
     const container = document.getElementById("board");
     for (let i = 0; i < 81; i++) {
@@ -128,9 +138,12 @@ function genGrid() {
 }
 
 
+/**
+ * Helper function. Returns an array of all the box divs on the board.
+ * @returns {Element[]}
+ */
 function getBoxes() {
     return Array.from(document.getElementsByClassName("box"));
-
 }
 
 
