@@ -18,8 +18,6 @@ def index():
 
 @socketio.on("updateBoard")
 def handle_message(message):
-    # TODO: updateBoard should give an x, y, and value instead of the entire board
-    
     if (not isinstance(message, dict)  # check data type of primary object
             or "loc" not in message or "value" not in message  # check keys
             or not isinstance(message["loc"], int) or not isinstance(message["value"], int)  # check data types of keys
