@@ -4,15 +4,18 @@
     box-sizing: border-box;
 }
 
+
 :root {
     --correct-text-color: #00C49A;
-    --line-color: #bdbdbd;
+    --line-color: #eacdc2;
     --thick-line-color: #e0e0e0;
-    --wrong-color: #b72b01;
-    --accented-background-color: rgba(66, 39, 73, 0.5);
-    --super-accented-background-color: rgba(77, 24, 108, 0.5);
-    --background: #1d1d1d;
+    --wrong-color: #b75d69;
+    --accented-background-color: #372549;
+    --super-accented-background-color: #774c60;
+    --background: #1a1423;
 }
+
+
 
 body {
     color: var(--line-color);
