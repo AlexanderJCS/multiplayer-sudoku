@@ -19,14 +19,16 @@ function onKeyPress(e) {
         sudokuBoard[selectedBox] = 0;
     } else {
         let num = parseInt(e.key);
-        if (!isNaN(num) && num >= 1 && num <= 9) {
-            sudokuBoard[selectedBox] = num;
+        if (isNaN(num) && num >= 1 && num <= 9) {
+            return;
         }
+
+        sudokuBoard[selectedBox] = num;
     }
 
     updateBoard();
 
-    socket.emit("updateBoard", sudokuBoard);
+    socket.emit("updateBoard", {loc: selectedBox, value: sudokuBoard[selectedBox]});
 }
 
 
@@ -160,9 +162,16 @@ function init() {
         correctBoard = data;
     })
 
+    socket.on("initialBoard", (data) => {
+        console.log("Received initial board: " + data);
+        sudokuBoard = data;
+        updateBoard();
+    })
+
     socket.on("updateBoard", (data) => {
         console.log("Received updated board: " + data);
-        sudokuBoard = data;
+        console.log(data.loc, data.value)
+        sudokuBoard[data.loc] = data.value;
         updateBoard();
     })
 }
