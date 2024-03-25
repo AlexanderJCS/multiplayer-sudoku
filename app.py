@@ -14,6 +14,7 @@ def index():
 
 @socketio.on("updateBoard")
 def handle_message(message):
+    # TODO: security vulnerability - check the message before broadcasting it to all clients.
     print(f"Received message: {message}")
     emit("updateBoard", message, broadcast=True)
 
