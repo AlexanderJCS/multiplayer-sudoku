@@ -144,7 +144,7 @@ function init() {
 
     document.addEventListener("keydown", onKeyPress);
 
-
+    // TODO: refactor - put this in a separate function
     socket.on("connect", () => {
         console.log("Connected to server");
     })
