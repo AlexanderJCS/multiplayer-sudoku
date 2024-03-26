@@ -55,7 +55,7 @@ class Board:
         
         for step in self._solve_generator():
             # filter out incomplete steps
-            if any(step[i][j] == 0 for i in range(9) for j in range(9)):
+            if any(step[i][j] == 0 for i in range(len(step)) for j in range(len(step[i]))):
                 continue
             
             solutions += 1
