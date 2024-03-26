@@ -35,7 +35,8 @@ def handle_message(message):
 def handle_connect():
     # send the correct board to the client when they connect. the correct board is [0] * 81
     emit("correctBoard", board.as_list_correct())
-    emit("initialBoard", board.as_list())
+    emit("currentBoard", board.as_list_current())
+    emit("originalBoard", board.as_list_original())
     print("Received connection")
 
 

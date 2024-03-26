@@ -1,6 +1,30 @@
+/**
+ * The current state of the board.
+ * @type {number[]}
+ */
 let sudokuBoard = Array(81).fill(0);
+
+/**
+ * The correct board that the player is trying to solve.
+ * @type {number[]}
+ */
 let correctBoard = Array(81).fill(0);
+
+/**
+ * The original board that the player will start to solve from.
+ * @type {number[]}
+ */
+let originalBoard = Array(81).fill(0);
+
+/**
+ * The index of the currently selected box. -1 if no box is selected.
+ * @type {number}
+ */
 let selectedBox = -1;
+
+/**
+ * The socket that connects to the server.
+ */
 let socket = io.connect("http://localhost:5000");
 
 
@@ -18,8 +42,7 @@ function boxClicked(e) {
 
 
 function onKeyPress(e) {
-    // TODO: refactor some of this - put this in a separate function
-    if (selectedBox === -1) {
+    if (selectedBox === -1 || originalBoard[selectedBox] !== 0) {
         return;
     }
 
@@ -167,33 +190,47 @@ function init() {
     // TODO: refactor - put this in a separate function
     socket.on("connect", () => {
         console.log("Connected to server");
-    })
+    });
 
     socket.on("disconnect", () => {
         console.log("Disconnected from server");
-    })
+    });
 
     socket.on("connect_error", (error) => {
         console.log("CONNECT ERROR: " + error);
-    })
+    });
 
     socket.on("correctBoard", (data) => {
+        // Sends the correct board to the client when they connect.
+
         console.log("Received correct board: " + data);
         correctBoard = data;
-    })
+    });
 
-    socket.on("initialBoard", (data) => {
-        console.log("Received initial board: " + data);
+    socket.on("originalBoard", (data) => {
+        // Sends the original board to the client when they connect.
+
+        console.log("Received original board: " + data);
+        originalBoard = data;
+        addOriginalHighlight();
+    });
+
+    socket.on("currentBoard", (data) => {
+        // Sends the current state of the board to the client when they connect.
+
+        console.log("Received the current board: " + data);
         sudokuBoard = data;
         updateBoard();
-    })
+    });
 
     socket.on("updateBoard", (data) => {
+        // Receives location-value pairs from the server and updates the board accordingly.
+
         console.log("Received updated board: " + data);
         console.log(data.loc, data.value)
         sudokuBoard[data.loc] = data.value;
         updateBoard();
-    })
+    });
 }
 
 window.onload = init;
