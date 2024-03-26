@@ -1,7 +1,6 @@
 """
 This file is meant to be the main entry point for the puzzle generator. It will write to a SQLite database that will
 be used by the Flask app to serve puzzles to the user. The database will have a table with the following columns:
-    - difficulty: INTEGER, the difficulty of the puzzle
     - puzzle: TEXT, a python-formatted list of integers representing the puzzle
     - solution: TEXT, a python-formatted list of integers representing the solution to the puzzle
 """
@@ -16,10 +15,10 @@ def create_table(cursor):
 
     :param cursor: The cursor object to use
     """
-    cursor.execute("CREATE TABLE IF NOT EXISTS puzzles (difficulty INTEGER, puzzle TEXT, solution TEXT)")
+    cursor.execute("CREATE TABLE IF NOT EXISTS puzzles (puzzle TEXT, solution TEXT)")
 
 
-def add_row(cursor, difficulty: int, puzzle: list[int], solution: list[int]):
+def add_row(cursor, puzzle: list[int], solution: list[int]):
     """
     Add a row to the database
 
@@ -28,7 +27,7 @@ def add_row(cursor, difficulty: int, puzzle: list[int], solution: list[int]):
     :param puzzle: The puzzle
     :param solution: The solution to the puzzle
     """
-    cursor.execute("INSERT INTO puzzles VALUES (?, ?, ?)", (difficulty, str(puzzle), str(solution)))
+    cursor.execute("INSERT INTO puzzles VALUES (?, ?)", (str(puzzle), str(solution)))
 
 
 def flatten(arr: list[list[int]]) -> list[int]:
@@ -48,19 +47,16 @@ def generate_puzzles(cursor):
     :param cursor: The database cursor object to use
     """
     
-    b = Board()
+    board = Board()
     
     num_puzzles = 1
     for i in range(num_puzzles):
         print(f"Generating puzzle {i + 1} / {num_puzzles}: {i / num_puzzles * 100:.2f}%")
         
-        b.clear()
-        puzzles, solution = b.generate([150, 350, 500])
-        
-        flat_solution = flatten(solution)
-        
-        for difficulty, puzzle in puzzles.items():
-            add_row(cursor, difficulty, flatten(puzzle), flat_solution)
+        board.clear()
+        solution = board.generate()
+
+        add_row(cursor, flatten(board.board), flatten(solution))
 
 
 def main():

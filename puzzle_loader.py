@@ -2,17 +2,16 @@ import sqlite3
 import ast
 
 
-def get_random_puzzle(difficulty: int):
+def get_random_puzzle():
     """
     Get a random puzzle from the database
 
-    :param difficulty: The difficulty of the puzzle.
     :return: (the puzzle, puzzle solution)
     """
     conn = sqlite3.connect("puzzles.db")
     cursor = conn.cursor()
 
-    cursor.execute("SELECT * FROM puzzles WHERE difficulty = ? ORDER BY RANDOM() LIMIT 1", (difficulty,))
+    cursor.execute("SELECT * FROM puzzles ORDER BY RANDOM() LIMIT 1")
     row = cursor.fetchone()
 
     conn.close()
@@ -21,4 +20,4 @@ def get_random_puzzle(difficulty: int):
         raise ValueError("No puzzles found with that difficulty")
 
     # ast.literal_eval converts "[1, 2, 3]" to [1, 2, 3]
-    return ast.literal_eval(row[1]), ast.literal_eval(row[2])
+    return ast.literal_eval(row[0]), ast.literal_eval(row[1])

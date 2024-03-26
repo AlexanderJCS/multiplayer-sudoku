@@ -3,7 +3,9 @@ import puzzle_loader as pl
 
 class Board:
     def __init__(self):
-        self.board, self.correct_board = pl.get_random_puzzle(150)
+        self.board, self.correct_board = pl.get_random_puzzle()
+        
+        print(f"Generated board: {self.board}, Correct board: {self.correct_board}")
     
     def update_from_request(self, request) -> None:
         """

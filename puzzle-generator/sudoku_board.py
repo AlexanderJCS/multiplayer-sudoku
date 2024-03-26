@@ -6,43 +6,42 @@ class Board:
     def __init__(self):
         self.board = [[0 for _ in range(9)] for _ in range(9)]
     
-    def generate(self, difficulties: list[int]) -> tuple[dict[int, list[list[int]]], list[list[int]]]:
+    def get_nonzero_cell_indices(self) -> list[tuple[int, int]]:
         """
-        Mutates the board to have the highest difficulty of the given difficulties.
-
-        :param difficulties: The difficulties to return for a given board. Higher values are harder.
-        :return (A dictionary of the difficulties as the key and the puzzle as the value,
-                 the solution to the board with the given difficulties)
+        Gets the indices of all cells that are not 0 in the order of least to greatest
+        
+        :return: A list of the indices
+        """
+        
+        return [
+            (x, y)
+            for y in range(len(self.board))
+            for x in range(len(self.board[y]))
+            if self.board[y][x] != 0
+        ]
+    
+    def generate(self) -> list[list[int]]:
+        """
+        Mutates the board to be a valid sudoku puzzle for the user to solve
+        
+        :return The solution to the puzzle
         """
         
         self.solve(rand_gen=True)
         solution = copy.deepcopy(self.board)
-        puzzles_by_difficulty = {}
         
-        for i in range(max(difficulties)):
-            if i % 10 == 0:
-                print(f"Progress: {100 * i / max(difficulties):.2f}%")
-            
-            x = -1
-            y = -1
-            
-            original = 0
-            
-            # TODO: instead, get a list of the available spaces. shuffle them, then go through them in order and set 0
-            while original == 0:
-                y = random.randint(0, len(self.board) - 1)
-                x = random.randint(0, len(self.board[y]) - 1)
-                original = self.board[y][x]
+        nonzero_cells = self.get_nonzero_cell_indices()
+        random.shuffle(nonzero_cells)
+        
+        for x, y in nonzero_cells:
+            original = self.board[y][x]
             
             self.board[y][x] = 0
             
             if not self.has_one_solution():
                 self.board[y][x] = original
-            
-            if i + 1 in difficulties:
-                puzzles_by_difficulty[i + 1] = (copy.deepcopy(self.board))
         
-        return puzzles_by_difficulty, solution
+        return solution
         
     def has_one_solution(self):
         """
