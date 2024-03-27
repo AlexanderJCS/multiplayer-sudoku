@@ -59,9 +59,10 @@ function boxClicked(e) {
 
 
 function togglePencil() {
-    console.log(pencilMode);
     pencilMode.toggle();
-    console.log(pencilMode.get())
+
+    let button = document.getElementById("toggle-pencil");
+    button.src = pencilMode.get() ? "../static/images/pencil.png" : "../static/images/pen.png";
 }
 
 
@@ -214,9 +215,7 @@ function init() {
         box.addEventListener("click", boxClicked);
     })
 
-    elementsByClass("toggle-pencil").forEach((button) => {
-        button.addEventListener("click", togglePencil);
-    })
+    document.getElementById("toggle-pencil").addEventListener("click", togglePencil);
 
 
     document.addEventListener("keydown", onKeyPress);
