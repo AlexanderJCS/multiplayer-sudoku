@@ -41,6 +41,24 @@ h1 {
 
 #players {
     margin: 3vh auto;
+    font-size: 20px;
+}
+
+.color {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    border-radius: 25%;
+
+    /* fix the box looking too high */
+    position: relative;
+    transform: translateY(25%);
+}
+
+.player {
+    display: flex;
+    justify-content: left;
+    margin: 1vh 0;
 }
 
 #board {
