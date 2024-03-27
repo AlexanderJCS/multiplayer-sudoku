@@ -41,4 +41,4 @@ def handle_connect():
 
 
 if __name__ == "__main__":
-    socketio.run(app, host="localhost", use_reloader=False, log_output=True)
+    socketio.run(app, host="0.0.0.0", use_reloader=False, log_output=True)
