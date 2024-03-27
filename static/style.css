@@ -16,6 +16,7 @@
 }
 
 body {
+    background-color: var(--background);
     color: var(--line-color);
     font-family: "Poppins", sans-serif;
     font-weight: 300;
@@ -26,24 +27,28 @@ h1 {
     text-transform: uppercase;
 }
 
-.container {
-    padding: 40px;
-    height: 100vh;
+.main-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+}
+
+.container {
+    padding: 40px;
+    height: 100vh;
     background-color: var(--background);
 }
 
+#players {
+    margin: 3vh auto;
+}
+
 #board {
-    width: min(90vw, 90vh); /* Change this to a percentage of the viewport width */
+    width: min(80vw, 80vh);
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
-    margin-top: 40px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 3vh auto;
 }
 
 .box.highlight {
@@ -64,13 +69,13 @@ h1 {
 
 .box {
     flex: 0 0 auto;
-    height: min(10vw, 10vh); /* Change this to a percentage of the viewport width */
-    width: min(10vw, 10vh); /* Change this to a percentage of the viewport width */
+    height: min(calc(80vw / 9), calc(80vh / 9)); /* Change this to a percentage of the viewport width */
+    width: min(calc(80vw / 9), calc(80vh / 9)); /* Change this to a percentage of the viewport width */
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--line-color);
-    font-size: min(10vw * 0.9, 10vh * 0.9);
+    font-size: min(calc(80vw / 9 * 0.9), calc(80vh / 9 * 0.9));
     user-select: none;
     border-right: min(0.3vw, 0.3vh) solid;
     border-bottom: min(0.3vw, 0.3vh) solid;
