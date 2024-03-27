@@ -70,28 +70,14 @@ h1 {
     align-items: center;
     justify-content: center;
     color: var(--line-color);
-    font-size: 90px;
+    font-size: min(10vw * 0.9, 10vh * 0.9);
     user-select: none;
-    border-right: 3px solid;
-    border-bottom: 3px solid;
-}
-
-/*
- * Set fixed size values for larger screens
- */
-@media (min-width: 900px) {
-    #board {
-        width: 900px;
-    }
-
-    .box {
-        height: 100px;
-        width: 100px;
-    }
+    border-right: min(0.3vw, 0.3vh) solid;
+    border-bottom: min(0.3vw, 0.3vh) solid;
 }
 
 .box:nth-child(3n) {
-    border-right: 10px solid;
+    border-right: min(1vw, 1vh) solid;
 }
 
 /* this is kinda goob but it works */
@@ -104,7 +90,7 @@ h1 {
 .box:nth-child(27n+25),
 .box:nth-child(27n+26),
 .box:nth-child(27n+27) {
-    border-bottom: 10px solid;
+    border-bottom: min(1vw, 1vh) solid;
 }
 
 /* also goob but it works */
@@ -117,17 +103,17 @@ h1 {
 .box:nth-child(7),
 .box:nth-child(8),
 .box:nth-child(9) {
-    border-top: 10px solid;
+    border-top: min(1vw, 1vh) solid;
 }
 
 .box:nth-child(9n) {
-    border-right: 10px solid;
+    border-right: min(1vw, 1vh) solid;
 }
 
 .box:nth-child(9n + 1) {
-    border-left: 10px solid;
+    border-left: min(1vw, 1vh) solid;
 }
 
 .box:nth-child(72) ~ .box {
-    border-bottom: 10px solid;
+    border-bottom: min(1vw, 1vh) solid;
 }
