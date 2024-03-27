@@ -212,7 +212,6 @@ function init() {
 
         console.log("Received original board: " + data);
         originalBoard = data;
-        addOriginalHighlight();
     });
 
     socket.on("currentBoard", (data) => {
