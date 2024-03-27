@@ -39,14 +39,14 @@ h1 {
     background-color: var(--background);
 }
 
-#players {
+.players {
     margin: 3vh auto;
-    font-size: 20px;
+    font-size: 25px;
 }
 
 .color {
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
     margin-right: 5px;
     border-radius: 25%;
 

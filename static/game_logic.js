@@ -27,6 +27,23 @@ let selectedBox = -1;
  */
 let socket = null;
 
+/**
+ * Whether the player is in pencil mode.
+ */
+let pencilMode = (function() {
+    let mode = false;
+
+    return {
+        toggle: function() {
+            mode = !mode;
+        },
+
+        get: function() {
+            return mode;
+        }
+    };
+})();
+
 
 function boxClicked(e) {
     let toSelect = parseInt(e.target.id);
@@ -38,6 +55,13 @@ function boxClicked(e) {
     }
 
     updateBoard();
+}
+
+
+function togglePencil() {
+    console.log(pencilMode);
+    pencilMode.toggle();
+    console.log(pencilMode.get())
 }
 
 
@@ -168,12 +192,17 @@ function genGrid() {
 }
 
 
+function elementsByClass(className) {
+    return Array.from(document.getElementsByClassName(className));
+}
+
+
 /**
  * Helper function. Returns an array of all the box divs on the board.
  * @returns {Element[]}
  */
 function getBoxes() {
-    return Array.from(document.getElementsByClassName("box"));
+    return elementsByClass("box");
 }
 
 
@@ -184,6 +213,11 @@ function init() {
     getBoxes().forEach((box) => {
         box.addEventListener("click", boxClicked);
     })
+
+    elementsByClass("toggle-pencil").forEach((button) => {
+        button.addEventListener("click", togglePencil);
+    })
+
 
     document.addEventListener("keydown", onKeyPress);
 
