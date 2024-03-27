@@ -23,9 +23,9 @@ let originalBoard = Array(81).fill(0);
 let selectedBox = -1;
 
 /**
- * The socket that connects to the server.
+ * The socket that connects to the server. Will be null until initialized in the init() function.
  */
-let socket = io.connect("http://localhost:5000");
+let socket = null;
 
 
 function boxClicked(e) {
@@ -186,6 +186,8 @@ function init() {
     })
 
     document.addEventListener("keydown", onKeyPress);
+
+    socket = io.connect("http://localhost:5000");
 
     // TODO: refactor - put this in a separate function
     socket.on("connect", () => {
