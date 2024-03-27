@@ -37,10 +37,13 @@ h1 {
 }
 
 #board {
-    width: 900px;
+    width: min(90vw, 90vh); /* Change this to a percentage of the viewport width */
     display: flex;
     flex-wrap: wrap;
+    justify-content: flex-start;
     margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .box.highlight {
@@ -60,8 +63,9 @@ h1 {
 }
 
 .box {
-    height: 100px;
-    width: 100px;
+    flex: 0 0 auto;
+    height: min(10vw, 10vh); /* Change this to a percentage of the viewport width */
+    width: min(10vw, 10vh); /* Change this to a percentage of the viewport width */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -70,6 +74,20 @@ h1 {
     user-select: none;
     border-right: 3px solid;
     border-bottom: 3px solid;
+}
+
+/*
+ * Set fixed size values for larger screens
+ */
+@media (min-width: 900px) {
+    #board {
+        width: 900px;
+    }
+
+    .box {
+        height: 100px;
+        width: 100px;
+    }
 }
 
 .box:nth-child(3n) {
