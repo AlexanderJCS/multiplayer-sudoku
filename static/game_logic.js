@@ -235,11 +235,16 @@ function updateBoxText() {
     let boxes = getBoxes();
 
     for (let i = 0; i < boxes.length; i++) {
+        let box = boxes[i];
+
         if (sudokuBoard[i] !== 0) {
-            boxes[i].innerText = sudokuBoard[i].toString();
+            box.innerText = sudokuBoard[i].toString();
         } else {
-            boxes[i].innerText = "";
+            box.innerText = "";
         }
+
+        let fontSizeFactor = Math.pow(box.innerText.length, 0.75);
+        box.style.fontSize = `min(calc(80vw / 9 / ${fontSizeFactor}), calc(80vh / 9 / ${fontSizeFactor}))`;
     }
 }
 
