@@ -1,3 +1,6 @@
+let pencilMarks = Array(81).fill("");
+
+
 /**
  * The current state of the board.
  * @type {number[]}
@@ -31,7 +34,7 @@ let socket = null;
  * Whether the player is in pencil mode.
  */
 let pencilMode = (function() {
-    let mode = false;
+    let mode = true;
 
     return {
         toggle: function() {
@@ -75,10 +78,16 @@ function onKeyPress(e) {
         sudokuBoard[selectedBox] = 0;
     } else {
         let num = parseInt(e.key);
-        addPencilMark(num);
-        return;
 
-        if (isNaN(num) || num < 1 && num > 9) {
+        console.log(num);
+
+        if (isNaN(num) || num < 1 || num > 9) {
+            return;
+        }
+
+        if (pencilMode.get()) {
+            addPencilMark(num);
+            updateBoard();
             return;
         }
 
@@ -96,23 +105,16 @@ function onKeyPress(e) {
  * @param num The number to add/remove as a pencil mark.
  */
 function addPencilMark(num) {
-    let selectedBoxElement = document.getElementById(selectedBox.toString());
+    let currentMarks = pencilMarks[selectedBox];
 
-    selectedBoxElement.classList.add("pencilMark");
-
-    if (selectedBoxElement.innerText.includes(num.toString())) {
-        selectedBoxElement.innerText = selectedBoxElement.innerText.replace(num.toString(), "");
-    } else if (selectedBoxElement.innerText.length < 5) {
-        selectedBoxElement.innerText += num.toString();
+    if (currentMarks.includes(num.toString())) {
+        pencilMarks[selectedBox] = currentMarks.replace(num.toString(), "");
+    } else if (currentMarks.length < 5) {
+        pencilMarks[selectedBox] += num.toString();
+        pencilMarks[selectedBox] = pencilMarks[selectedBox].split("").sort().join("");
     }
 
-    // sort the innerText by number
-    selectedBoxElement.innerText = selectedBoxElement.innerText.split("").sort().join("");
-
-    // set the font size based on the length of the innerText
-    // 0.75 is an arbitrary value that seems to work well
-    let fontSizeFactor = Math.pow(selectedBoxElement.innerText.length, 0.75);
-    selectedBoxElement.style.fontSize = `min(calc(80vw / 9 / ${fontSizeFactor}), calc(80vh / 9 / ${fontSizeFactor}))`;
+    socket.emit("pencil_mark", {loc: selectedBox, value: pencilMarks[selectedBox]});
 }
 
 
@@ -183,11 +185,41 @@ function getRowCol(boxID) {
 
 
 /**
+ * Adds pencil marks to the boxes based on the current state of the pencilMarks board
+ */
+function updatePencilMarks() {
+    for (let i = 0; i < 81; i++) {
+        let box = document.getElementById(i.toString());
+
+        if (pencilMarks[i] === "") {
+            box.classList.remove("pencilMark");
+            continue;
+        }
+
+        if (sudokuBoard[i] !== 0) {
+            console.error(`Box ${i} has a pencil mark but also has a value.`);
+            box.classList.remove("pencilMark");
+            continue;
+        }
+
+        box.innerText = pencilMarks[i];
+
+        // set the font size based on the length of the innerText
+        // 0.75 is an arbitrary value that seems to work well
+        let fontSizeFactor = Math.pow(box.innerText.length, 0.75);
+        box.style.fontSize = `min(calc(80vw / 9 / ${fontSizeFactor}), calc(80vh / 9 / ${fontSizeFactor}))`;
+        box.classList.add("pencilMark");
+    }
+}
+
+
+/**
  * Highlights the boxes and updates the text in each box.
  */
 function updateBoard() {
     updateBoxText();
     addWrongColor();
+    updatePencilMarks();
     highlightBoxes(selectedBox);
 }
 
@@ -292,6 +324,12 @@ function init() {
         console.log("Received updated board: " + data);
         console.log(data.loc, data.value)
         sudokuBoard[data.loc] = data.value;
+        updateBoard();
+    });
+
+    socket.on("pencil_mark", (data) => {
+        console.log("Received pencil mark: " + data);
+        pencilMarks[data.loc] = data.value;
         updateBoard();
     });
 }

@@ -31,6 +31,21 @@ def handle_message(message):
     emit("updateBoard", message, broadcast=True)
 
 
+@socketio.on("pencil_mark")
+def handle_pencil_mark(message):
+    if (not isinstance(message, dict)  # check data type of primary object
+            or "loc" not in message or "value" not in message  # check keys
+            or not isinstance(message["loc"], int) or not isinstance(message["value"], str)  # check data types of keys
+            or message["loc"] < 0 or message["loc"] >= 81  # check bounds of location
+            or (not message["value"].isdigit() and len(message) == 0) or "0" in message["value"]):
+
+        print(f"ERROR: Invalid pencilMark message received {message}")
+        return
+
+    board.pencil_mark(message)
+    emit("pencil_mark", message, broadcast=True)
+
+
 @socketio.on("connect")
 def handle_connect():
     # send the correct board to the client when they connect. the correct board is [0] * 81
