@@ -75,7 +75,10 @@ function onKeyPress(e) {
         sudokuBoard[selectedBox] = 0;
     } else {
         let num = parseInt(e.key);
-        if (isNaN(num) && num >= 1 && num <= 9) {
+        addPencilMark(num);
+        return;
+
+        if (isNaN(num) || num < 1 && num > 9) {
             return;
         }
 
@@ -86,6 +89,32 @@ function onKeyPress(e) {
 
     socket.emit("updateBoard", {loc: selectedBox, value: sudokuBoard[selectedBox]});
 }
+
+
+/**
+ *
+ * @param num The number to add/remove as a pencil mark.
+ */
+function addPencilMark(num) {
+    let selectedBoxElement = document.getElementById(selectedBox.toString());
+
+    selectedBoxElement.classList.add("pencilMark");
+
+    if (selectedBoxElement.innerText.includes(num.toString())) {
+        selectedBoxElement.innerText = selectedBoxElement.innerText.replace(num.toString(), "");
+    } else if (selectedBoxElement.innerText.length < 5) {
+        selectedBoxElement.innerText += num.toString();
+    }
+
+    // sort the innerText by number
+    selectedBoxElement.innerText = selectedBoxElement.innerText.split("").sort().join("");
+
+    // set the font size based on the length of the innerText
+    // 0.75 is an arbitrary value that seems to work well
+    let fontSizeFactor = Math.pow(selectedBoxElement.innerText.length, 0.75);
+    selectedBoxElement.style.fontSize = `min(calc(80vw / 9 / ${fontSizeFactor}), calc(80vh / 9 / ${fontSizeFactor}))`;
+}
+
 
 
 /**
