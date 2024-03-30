@@ -1,4 +1,4 @@
-let pencilMarks = Array(81).fill("");
+let pencilBoard = Array(81).fill("");
 
 
 /**
@@ -105,20 +105,20 @@ function onKeyPress(e) {
  * @param num The number to add/remove as a pencil mark.
  */
 function addPencilMark(num) {
-    let currentMarks = pencilMarks[selectedBox];
+    let currentMarks = pencilBoard[selectedBox];
 
     if (currentMarks.includes(num.toString())) {
-        pencilMarks[selectedBox] = currentMarks.replace(num.toString(), "");
+        pencilBoard[selectedBox] = currentMarks.replace(num.toString(), "");
     } else if (currentMarks.length < 5) {
-        pencilMarks[selectedBox] += num.toString();
-        pencilMarks[selectedBox] = pencilMarks[selectedBox].split("").sort().join("");
+        pencilBoard[selectedBox] += num.toString();
+        pencilBoard[selectedBox] = pencilBoard[selectedBox].split("").sort().join("");
     }
 
-    if (pencilMarks[selectedBox].length > 0) {
+    if (pencilBoard[selectedBox].length > 0) {
         sudokuBoard[selectedBox] = 0;  // clear the box if there's a pencil mark
     }
 
-    socket.emit("pencil_mark", {loc: selectedBox, value: pencilMarks[selectedBox]});
+    socket.emit("pencil_mark", {loc: selectedBox, value: pencilBoard[selectedBox]});
 }
 
 
@@ -195,7 +195,7 @@ function updatePencilMarks() {
     for (let i = 0; i < 81; i++) {
         let box = document.getElementById(i.toString());
 
-        if (pencilMarks[i] === "") {
+        if (pencilBoard[i] === "") {
             box.classList.remove("pencilMark");
             continue;
         }
@@ -206,7 +206,7 @@ function updatePencilMarks() {
             continue;
         }
 
-        box.innerText = pencilMarks[i];
+        box.innerText = pencilBoard[i];
 
         // set the font size based on the length of the innerText
         // 0.75 is an arbitrary value that seems to work well
@@ -300,6 +300,15 @@ function init() {
         console.log("CONNECT ERROR: " + error);
     });
 
+    socket.on("initData", (data) => {
+        console.log("Received initialization data: " + data);
+        correctBoard = data["correctBoard"];
+        originalBoard = data["originalBoard"];
+        sudokuBoard = data["currentBoard"];
+        pencilBoard = data["pencilBoard"];
+        updateBoard();
+    })
+
     socket.on("correctBoard", (data) => {
         // Sends the correct board to the client when they connect.
 
@@ -328,13 +337,13 @@ function init() {
         console.log(`Received updated board: ${data}`);
         console.log(data.loc, data.value)
         sudokuBoard[data.loc] = data.value;
-        pencilMarks[data.loc] = "";  // clear pencil marks when a value is added
+        pencilBoard[data.loc] = "";  // clear pencil marks when a value is added
         updateBoard();
     });
 
     socket.on("pencil_mark", (data) => {
         console.log(`Received pencil mark: ${data}`);
-        pencilMarks[data.loc] = data.value;
+        pencilBoard[data.loc] = data.value;
         sudokuBoard[data.loc] = 0;  // clear the box if there's a pencil mark
         updateBoard();
     });

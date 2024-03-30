@@ -4,7 +4,7 @@ import copy
 
 class Board:
     def __init__(self):
-        self.pencil_marks: list[str] = ["" for _ in range(81)]
+        self.pencil_board: list[str] = ["" for _ in range(81)]
         self.board, self.correct_board = pl.get_random_puzzle()
         self.original_board = copy.deepcopy(self.board)
         
@@ -18,7 +18,7 @@ class Board:
         :param request: A request, containing the loc and value keys
         """
 
-        self.pencil_marks[request["loc"]] = ""
+        self.pencil_board[request["loc"]] = ""
         self.board[request["loc"]] = request["value"]
 
     def pencil_mark(self, message: dict) -> None:
@@ -28,32 +28,18 @@ class Board:
         :param message: A message containing the loc and value keys
         """
 
-        self.pencil_marks[message["loc"]] = message["value"]
+        self.pencil_board[message["loc"]] = message["value"]
 
-    def as_list_original(self):
+    def get_init_data(self):
         """
-        Gets the initial board
-        
-        :return: A deepcopy of the initial board
+        Get the initialization data for a client
+        :return: The initial board, the correct board, and the pencil marks
         """
-        
-        return copy.deepcopy(self.original_board)
-    
-    def as_list_correct(self):
-        """
-        Gets the correct board
-        
-        :return: A deepcopy of the correct board
-        """
-        
-        return copy.deepcopy(self.correct_board)
-    
-    def as_list_current(self):
-        """
-        Gets the board as a list datatype
-        
-        :return: A deepcopy of the board
-        """
-        
-        return copy.deepcopy(self.board)
+
+        return {
+            "originalBoard": copy.deepcopy(self.original_board),
+            "correctBoard": copy.deepcopy(self.correct_board),
+            "currentBoard": copy.deepcopy(self.board),
+            "pencilBoard": copy.deepcopy(self.pencil_board)
+        }
     

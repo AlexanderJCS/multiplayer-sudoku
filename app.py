@@ -49,9 +49,7 @@ def handle_pencil_mark(message):
 @socketio.on("connect")
 def handle_connect():
     # send the correct board to the client when they connect. the correct board is [0] * 81
-    emit("correctBoard", board.as_list_correct())
-    emit("currentBoard", board.as_list_current())
-    emit("originalBoard", board.as_list_original())
+    emit("initData", board.get_init_data())
     print("Received connection")
 
 
