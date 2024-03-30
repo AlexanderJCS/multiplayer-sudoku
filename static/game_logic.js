@@ -114,6 +114,10 @@ function addPencilMark(num) {
         pencilMarks[selectedBox] = pencilMarks[selectedBox].split("").sort().join("");
     }
 
+    if (pencilMarks[selectedBox].length > 0) {
+        sudokuBoard[selectedBox] = 0;  // clear the box if there's a pencil mark
+    }
+
     socket.emit("pencil_mark", {loc: selectedBox, value: pencilMarks[selectedBox]});
 }
 
@@ -321,15 +325,17 @@ function init() {
     socket.on("updateBoard", (data) => {
         // Receives location-value pairs from the server and updates the board accordingly.
 
-        console.log("Received updated board: " + data);
+        console.log(`Received updated board: ${data}`);
         console.log(data.loc, data.value)
         sudokuBoard[data.loc] = data.value;
+        pencilMarks[data.loc] = "";  // clear pencil marks when a value is added
         updateBoard();
     });
 
     socket.on("pencil_mark", (data) => {
-        console.log("Received pencil mark: " + data);
+        console.log(`Received pencil mark: ${data}`);
         pencilMarks[data.loc] = data.value;
+        sudokuBoard[data.loc] = 0;  // clear the box if there's a pencil mark
         updateBoard();
     });
 }
