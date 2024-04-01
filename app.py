@@ -15,7 +15,7 @@ games = Games()
 @app.route("/<game_code>")
 def index(game_code):
     games.add_game(game_code)
-    return render_template("index.html")
+    return render_template("game.html")
 
 
 @socketio.on("update_board")
