@@ -81,8 +81,6 @@ function onKeyPress(e) {
     } else {
         let num = parseInt(e.key);
 
-        console.log(num);
-
         if (isNaN(num) || num < 1 || num > 9) {
             return;
         }
@@ -93,34 +91,47 @@ function onKeyPress(e) {
             return;
         }
 
-        sudokuBoard[selectedBox] = num;
+        addPenMark(num);
     }
 
     updateBoard();
+}
 
-    socket.emit("update_board", {loc: selectedBox, value: sudokuBoard[selectedBox]});
+
+function addPenMark(num, loc=selectedBox) {
+    sudokuBoard[loc] = num;
+
+    // QOL feature: remove pencil marks that will be impossible now that the location is filled in
+    if (sudokuBoard[loc] === correctBoard[loc]) {
+        getBoxesInSelection(selectedBox).forEach((boxLoc) => {
+            if (pencilBoard[boxLoc].includes(num) && boxLoc !== loc) {
+                addPencilMark(num, boxLoc);
+            }
+        });
+    }
+
+    socket.emit("update_board", {loc: loc, value: sudokuBoard[selectedBox]});
 }
 
 
 /**
- *
  * @param num The number to add/remove as a pencil mark.
  */
-function addPencilMark(num) {
-    let currentMarks = pencilBoard[selectedBox];
+function addPencilMark(num, loc=selectedBox) {
+    let currentMarks = pencilBoard[loc];
 
     if (currentMarks.includes(num.toString())) {
-        pencilBoard[selectedBox] = currentMarks.replace(num.toString(), "");
+        pencilBoard[loc] = currentMarks.replace(num.toString(), "");
     } else if (currentMarks.length < 5) {
-        pencilBoard[selectedBox] += num.toString();
-        pencilBoard[selectedBox] = pencilBoard[selectedBox].split("").sort().join("");
+        pencilBoard[loc] += num.toString();
+        pencilBoard[loc] = pencilBoard[selectedBox].split("").sort().join("");
     }
 
-    if (pencilBoard[selectedBox].length > 0) {
-        sudokuBoard[selectedBox] = 0;  // clear the box if there's a pencil mark
+    if (pencilBoard[loc].length > 0) {
+        sudokuBoard[loc] = 0;  // clear the box if there's a pencil mark
     }
 
-    socket.emit("pencil_mark", {loc: selectedBox, value: pencilBoard[selectedBox]});
+    socket.emit("pencil_mark", {loc: loc, value: pencilBoard[loc]});
 }
 
 
@@ -145,8 +156,6 @@ function updatePlayerList() {
         playerList.innerHTML = "";
 
         for (let player of Object.values(players)) {
-            console.log(player);
-
             let playerDiv = document.createElement("div");
             playerDiv.classList.add("player");
 
@@ -163,6 +172,30 @@ function updatePlayerList() {
             playerList.appendChild(playerDiv);
         }
     });
+}
+
+
+/**
+ * Gets the boxes within the selection. Used for removing pencil marks when adding a correct number.
+ */
+function getBoxesInSelection(boxID) {
+    let boxes = getBoxes();
+    let [row, col] = getRowCol(boxID);
+    let gridTopLeft = getGridTopLeft(boxID);
+    let num = sudokuBoard[boxID];
+
+    let selection = []
+
+    for (let i = 0; i < 81; i++) {
+        let [row2, col2] = getRowCol(i);
+        let gridTopLeft2 = getGridTopLeft(i);
+
+        if ((row === row2 || col === col2 || gridTopLeft === gridTopLeft2)) {
+            selection.push(i);
+        }
+    }
+
+    return selection;
 }
 
 
