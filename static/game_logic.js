@@ -310,10 +310,10 @@ function init() {
     updateBoard();
 
     getBoxes().forEach((box) => {
-        box.addEventListener("click", boxClicked);
+        box.addEventListener("mousedown", boxClicked);
     })
 
-    document.getElementById("toggle-pencil").addEventListener("click", togglePencil);
+    document.getElementById("toggle-pencil").addEventListener("mousedown", togglePencil);
 
 
     document.addEventListener("keydown", onKeyPress);
@@ -387,7 +387,9 @@ function init() {
         updateBoard();
     });
 
-    socket.emit("requestInitData");
+    let gameCode = window.location.pathname.split('/')[1];
+
+    socket.emit("join_game", gameCode);
 }
 
 window.onload = init;

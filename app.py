@@ -1,24 +1,20 @@
-from dataclasses import dataclass
-import hashlib
-
 from flask import Flask, render_template, request
 from flask_socketio import SocketIO, emit
 
-from player_list import PlayerList
-import board
+from games import Games
 
-
-board = board.Board()
 
 app = Flask(__name__)
 # TODO: Add the SECRET_KEY configuration to the app object.
+
 socketio = SocketIO(app, cors_allowed_origins="*")
 
-player_list = PlayerList()
+games = Games()
 
 
-@app.route("/")
-def index():
+@app.route("/<game_code>")
+def index(game_code):
+    games.add_game(game_code)
     return render_template("index.html")
 
 
@@ -32,9 +28,11 @@ def handle_message(message):
         
         print(f"ERROR: Invalid message received {message}")
         return
-    
-    board.update_from_request(message)
-    emit("updateBoard", message, broadcast=True)
+
+    game = games.game_from_player(request.sid)
+
+    game.board.update_from_request(message)
+    emit("updateBoard", message, room=game.id)
 
 
 @socketio.on("pencil_mark")
@@ -48,28 +46,38 @@ def handle_pencil_mark(message):
         print(f"ERROR: Invalid pencilMark message received {message}")
         return
 
-    board.pencil_mark(message)
-    emit("pencil_mark", message, broadcast=True)
+    game = games.game_from_player(request.sid)
+
+    game.board.pencil_mark(message)
+    emit("pencil_mark", message, room=game.id)
 
 
 @socketio.on("disconnect")
 def handle_disconnect():
     print(f"Received disconnection from {request.sid}")
-    player_list.remove_player(request.sid)
-    emit("players", player_list.as_dict(), broadcast=True)
+
+    game = games.game_from_player(request.sid)
+
+    game.player_list.remove_player(request.sid)
+    emit("players", game.player_list.as_dict(), room=game.id)
 
 
-@socketio.on("requestInitData")
-def handle_request_init_data():
-    emit("boardData", board.get_init_data())
-    emit("players", player_list.as_dict())
+@socketio.on("join_game")
+def handle_join_game(game_code):
+    if not games.has_game(game_code):
+        print(f"Client tried connecting to game {game_code} which does not exist")
+        return
+
+    games.add_player(request.sid, game_code)
+    game = games.game_from_player(request.sid)
+
+    emit("boardData", game.board.get_init_data())
+    emit("players", game.player_list.as_dict())
 
 
 @socketio.on("connect")
 def handle_connect():
     print(f"Received connection from {request.sid}")
-    player_list.add_player(request.sid)
-    emit("players", player_list.as_dict(), broadcast=True)
 
 
 if __name__ == "__main__":
