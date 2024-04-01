@@ -36,7 +36,7 @@ let players = {};
  * Whether the player is in pencil mode.
  */
 let pencilMode = (function() {
-    let mode = true;
+    let mode = false;
 
     return {
         toggle: function() {
