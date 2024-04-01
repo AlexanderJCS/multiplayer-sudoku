@@ -28,7 +28,9 @@ let selectedBox = -1;
 /**
  * The socket that connects to the server. Will be null until initialized in the init() function.
  */
-let socket = null;
+let socket = io.connect("http://localhost:5000");
+
+let players = {};
 
 /**
  * Whether the player is in pencil mode.
@@ -135,6 +137,32 @@ function addWrongColor() {
             boxes[i].classList.remove("wrongColor");
         }
     }
+}
+
+
+function updatePlayerList() {
+    elementsByClass("players").forEach((playerList) => {
+        playerList.innerHTML = "";
+
+        for (let player of Object.values(players)) {
+            console.log(player);
+
+            let playerDiv = document.createElement("div");
+            playerDiv.classList.add("player");
+
+            let colorDiv = document.createElement("div");
+            colorDiv.classList.add("color");
+            colorDiv.style.backgroundColor = player.color;
+            playerDiv.appendChild(colorDiv);
+
+            let nameDiv = document.createElement("div");
+            nameDiv.classList.add("name");
+            nameDiv.innerText = player.name;
+            playerDiv.appendChild(nameDiv);
+
+            playerList.appendChild(playerDiv);
+        }
+    });
 }
 
 
@@ -290,8 +318,6 @@ function init() {
 
     document.addEventListener("keydown", onKeyPress);
 
-    socket = io.connect("http://localhost:5000");
-
     // TODO: refactor - put this in a separate function
     socket.on("connect", () => {
         console.log("Connected to server");
@@ -305,14 +331,22 @@ function init() {
         console.log("CONNECT ERROR: " + error);
     });
 
-    socket.on("initData", (data) => {
+    socket.on("boardData", (data) => {
         console.log("Received initialization data: " + data);
         correctBoard = data["correctBoard"];
         originalBoard = data["originalBoard"];
         sudokuBoard = data["currentBoard"];
         pencilBoard = data["pencilBoard"];
         updateBoard();
-    })
+    });
+
+    socket.on("players", (data) => {
+        players = data;
+        console.log("Received players:");
+        console.log(players);
+
+        updatePlayerList();
+    });
 
     socket.on("correctBoard", (data) => {
         // Sends the correct board to the client when they connect.
@@ -352,6 +386,8 @@ function init() {
         sudokuBoard[data.loc] = 0;  // clear the box if there's a pencil mark
         updateBoard();
     });
+
+    socket.emit("requestInitData");
 }
 
 window.onload = init;
