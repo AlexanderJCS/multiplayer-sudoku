@@ -98,7 +98,7 @@ function onKeyPress(e) {
 
     updateBoard();
 
-    socket.emit("updateBoard", {loc: selectedBox, value: sudokuBoard[selectedBox]});
+    socket.emit("update_board", {loc: selectedBox, value: sudokuBoard[selectedBox]});
 }
 
 
@@ -331,7 +331,7 @@ function init() {
         console.log("CONNECT ERROR: " + error);
     });
 
-    socket.on("boardData", (data) => {
+    socket.on("board_data", (data) => {
         console.log("Received initialization data: " + data);
         correctBoard = data["correctBoard"];
         originalBoard = data["originalBoard"];
@@ -348,29 +348,7 @@ function init() {
         updatePlayerList();
     });
 
-    socket.on("correctBoard", (data) => {
-        // Sends the correct board to the client when they connect.
-
-        console.log("Received correct board: " + data);
-        correctBoard = data;
-    });
-
-    socket.on("originalBoard", (data) => {
-        // Sends the original board to the client when they connect.
-
-        console.log("Received original board: " + data);
-        originalBoard = data;
-    });
-
-    socket.on("currentBoard", (data) => {
-        // Sends the current state of the board to the client when they connect.
-
-        console.log("Received the current board: " + data);
-        sudokuBoard = data;
-        updateBoard();
-    });
-
-    socket.on("updateBoard", (data) => {
+    socket.on("update_board", (data) => {
         // Receives location-value pairs from the server and updates the board accordingly.
 
         console.log(`Received updated board: ${data}`);

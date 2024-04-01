@@ -18,7 +18,7 @@ def index(game_code):
     return render_template("index.html")
 
 
-@socketio.on("updateBoard")
+@socketio.on("update_board")
 def handle_message(message):
     if (not isinstance(message, dict)  # check data type of primary object
             or "loc" not in message or "value" not in message  # check keys
@@ -32,7 +32,7 @@ def handle_message(message):
     game = games.game_from_player(request.sid)
 
     game.board.update_from_request(message)
-    emit("updateBoard", message, room=game.id)
+    emit("update_board", message, room=game.id)
 
 
 @socketio.on("pencil_mark")
@@ -71,8 +71,8 @@ def handle_join_game(game_code):
     games.add_player(request.sid, game_code)
     game = games.game_from_player(request.sid)
 
-    emit("boardData", game.board.get_init_data())
-    emit("players", game.player_list.as_dict())
+    emit("board_data", game.board.get_init_data())
+    emit("players", game.player_list.as_dict(), room=game.id)
 
 
 @socketio.on("connect")
