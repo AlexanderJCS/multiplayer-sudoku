@@ -69,6 +69,13 @@ h1 {
     margin: 3vh auto;
 }
 
+#toggle-pencil {
+    cursor: pointer;
+    height: 100px;
+    width: 100px;
+    transform: translateY(25%);  /* move the image down by a percentage of its height to look better on the webpage */
+}
+
 .box.highlight {
     background-color: var(--accented-background-color);
     color: inherit;
