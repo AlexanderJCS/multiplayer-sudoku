@@ -76,23 +76,19 @@ function onKeyPress(e) {
         return;
     }
 
-    if (e.key === "Backspace" || e.key === "Delete") {
-        sudokuBoard[selectedBox] = 0;
-    } else {
-        let num = parseInt(e.key);
+    let num = (e.key === "Delete" || e.key === "Backspace") ? 0 : parseInt(e.key);
 
-        if (isNaN(num) || num < 1 || num > 9) {
-            return;
-        }
-
-        if (pencilMode.get()) {
-            addPencilMark(num);
-            updateBoard();
-            return;
-        }
-
-        addPenMark(num);
+    if (isNaN(num)) {
+        return;
     }
+
+    if (pencilMode.get()) {
+        addPencilMark(num);
+        updateBoard();
+        return;
+    }
+
+    addPenMark(num);
 
     updateBoard();
 }
@@ -100,6 +96,7 @@ function onKeyPress(e) {
 
 function addPenMark(num, loc=selectedBox) {
     sudokuBoard[loc] = num;
+    socket.emit("update_board", {loc: loc, value: sudokuBoard[selectedBox]});
 
     // QOL feature: remove pencil marks that will be impossible now that the location is filled in
     if (sudokuBoard[loc] === correctBoard[loc]) {
@@ -109,13 +106,12 @@ function addPenMark(num, loc=selectedBox) {
             }
         });
     }
-
-    socket.emit("update_board", {loc: loc, value: sudokuBoard[selectedBox]});
 }
 
 
 /**
  * @param num The number to add/remove as a pencil mark.
+ * @param loc The location of the box to add the pencil mark to. Defaults to the selected box.
  */
 function addPencilMark(num, loc=selectedBox) {
     let currentMarks = pencilBoard[loc];
@@ -131,6 +127,7 @@ function addPencilMark(num, loc=selectedBox) {
         sudokuBoard[loc] = 0;  // clear the box if there's a pencil mark
     }
 
+    console.log({loc: loc, value: pencilBoard[loc]})
     socket.emit("pencil_mark", {loc: loc, value: pencilBoard[loc]});
 }
 
