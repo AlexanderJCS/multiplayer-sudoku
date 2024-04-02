@@ -127,7 +127,6 @@ function addPencilMark(num, loc=selectedBox) {
         sudokuBoard[loc] = 0;  // clear the box if there's a pencil mark
     }
 
-    console.log({loc: loc, value: pencilBoard[loc]})
     socket.emit("pencil_mark", {loc: loc, value: pencilBoard[loc]});
 }
 
