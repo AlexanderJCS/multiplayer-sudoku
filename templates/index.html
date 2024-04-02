@@ -2,25 +2,43 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Sudoku</title>
+    <title>Multiplayer Sudoku</title>
 
-    <link rel="stylesheet" href="../static/style.css">
-
-    <!-- Dependencies -->
-    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js" integrity="sha384-2huaZvOR9iDzHqslqwpR87isEmrfxqyWOF7hr7BY6KG0+hVKLoEXMPUJw3ynWuhO" crossorigin="anonymous"></script>
-
-    <!-- Google Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/homepage/style.css">
 </head>
 <body>
-    <script src="../static/game_logic.js"></script>
-
-    <div class="container">
-        <div id="board">
-            <!-- elements are to be populated in Javascript code -->
+    <div class="container" id="head_container">
+        <div class="header">
+            <h1>Multiplayer Sudoku</h1>
         </div>
+
+        <h2>Create or Join Game By Code</h2>
+        <label>
+            <input id="gameId" type="text" name="game_id" placeholder="Game ID" required>
+            <button id="join">Join</button>
+        </label>
     </div>
+
+    <div class="container" id="description">
+        <h2>How to Play</h2>
+        <p>
+            Magnis tempor commodo sed nostra velit natoque orci. Proin inceptos elit nunc cum parturient ligula class nisi diam! Duis curabitur, primis velit torquent mi nunc tempus fringilla. Posuere dignissim ante posuere facilisis in cubilia lorem ante suspendisse netus massa primis. Scelerisque non venenatis eget malesuada sodales posuere eget potenti nisi? Dictumst massa ac viverra. Penatibus eros maecenas.
+        </p>
+        <p>
+            Tempus semper placerat, a massa dictum. Phasellus leo ligula in nibh tellus. Scelerisque inceptos, auctor eleifend maecenas hendrerit. Porta donec malesuada metus ad. Interdum in nascetur diam ut. Commodo consectetur dis mattis nullam magna hendrerit posuere consectetur euismod lectus natoque etiam. Dictumst morbi inceptos tempor inceptos lacinia. Torquent ultricies ullamcorper nunc enim. Porttitor nascetur mi porttitor facilisi. Hendrerit ante augue habitant consequat consectetur. Consectetur dignissim maecenas malesuada hendrerit.
+        </p>
+        <p>
+            Consectetur tristique nec maecenas convallis tristique rutrum euismod eleifend laoreet metus fusce. Ultricies ad at montes interdum semper nibh nascetur rhoncus egestas? Arcu vitae congue risus euismod donec pretium dapibus diam accumsan proin aenean. Et nam a facilisis ac gravida. Nam torquent felis feugiat aliquam scelerisque tincidunt phasellus ornare. Fermentum ultricies vestibulum rhoncus quis felis dapibus gravida pellentesque facilisi et leo nibh. Nisi pretium.
+        </p>
+        <p>
+            Quisque elit porttitor potenti ipsum purus felis egestas lorem facilisi sociis mauris aliquam! Tempor etiam vel adipiscing rutrum phasellus eget et. Lacinia facilisis viverra mattis pharetra tempor gravida aenean vehicula potenti litora. Varius habitasse dapibus purus, fringilla consequat. Integer cubilia purus cum etiam habitant hendrerit penatibus sagittis tortor purus! Class natoque dui accumsan cras cursus vivamus leo porta ultricies blandit curabitur? Conubia scelerisque dapibus auctor ut volutpat natoque sem. Gravida lacus aptent ligula natoque libero. Sollicitudin nunc at sollicitudin rhoncus etiam semper aenean platea.
+        </p>
+        <p>
+            Augue ridiculus inceptos vel at quisque tellus.
+            Aliquet adipiscing volutpat bibendum sodales facilisis. Nibh pretium fringilla lobortis semper. Primis duis quisque dapibus posuere. Vestibulum mus sagittis cursus egestas parturient egestas himenaeos. Molestie nisi sociis molestie nam. Vestibulum tortor vivamus posuere vitae orci arcu neque potenti sagittis convallis. Diam accumsan cubilia nullam nulla ante. Ligula.
+        </p>
+    </div>
+
+    <script src="../static/homepage/join.js"></script>
 </body>
 </html>

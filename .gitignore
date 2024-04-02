@@ -1,7 +1,8 @@
-.vscode
+.vscode/
 .idea
 *.iml
 *.xml
 .venv
 __pycache__
 *.pyc
+puzzle-generator/puzzles.db
