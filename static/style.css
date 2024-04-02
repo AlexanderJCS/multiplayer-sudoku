@@ -6,13 +6,13 @@
 
 
 :root {
-    --correct-text-color: #00C49A;
-    --line-color: #eacdc2;
-    --thick-line-color: #e0e0e0;
-    --wrong-color: #b75d69;
-    --accented-background-color: #372549;
-    --super-accented-background-color: #774c60;
-    --background: #1a1423;
+    --correct-text-color: #84a59d;
+    --line-color: #0c222b;
+    --thick-line-color: #000000;
+    --wrong-color: #f6bd60;
+    --accented-background-color: #f5cac3;
+    --super-accented-background-color: #f28482; 
+    --background: #f7ede2;
 }
 
 
@@ -39,7 +39,7 @@ h1 {
 }
 
 #board {
-    width: 900px;
+    width: 750px;
     display: flex;
     flex-wrap: wrap;
     margin-top: 40px;
@@ -48,7 +48,7 @@ h1 {
 .box.highlight {
     background-color: var(--accented-background-color);
     color: inherit;
-    border-color: inherit;
+    border-color: var(--line-color);
 }
 
 .box.superHighlight {
@@ -58,24 +58,26 @@ h1 {
 .box.wrongColor {
     background-color: var(--wrong-color);
     color: inherit;
-    border-color: inherit;
+    border-color: var(--line-color);
 }
 
 .box {
-    height: 100px;
-    width: 100px;
+    height: 75px;
+    width: 75px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--line-color);
-    font-size: 90px;
+    font-size: 64px;
     user-select: none;
-    border-right: 3px solid;
-    border-bottom: 3px solid;
+    border: 3px solid var(--line-color);
+    margin: 2px;
+    border-radius: 10px;
+
 }
 
 .box:nth-child(3n) {
-    border-right: 10px solid;
+    margin-right: 15px;
 }
 
 /* this is kinda goob but it works */
@@ -88,13 +90,13 @@ h1 {
 .box:nth-child(27n+25),
 .box:nth-child(27n+26),
 .box:nth-child(27n+27) {
-    border-bottom: 10px solid;
+    margin-bottom: 15px;
 }
 
 .box:nth-child(9n) {
-    border-right: none;
+    
 }
 
 .box:nth-child(72) ~ .box {
-    border-bottom: none;
+    
 }
