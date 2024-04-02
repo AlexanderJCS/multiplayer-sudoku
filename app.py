@@ -18,7 +18,7 @@ def index():
 
 
 @app.route("/<game_code>")
-def game(game_code):
+def game_code_req(game_code):
     games.add_game(game_code)
     return render_template("game.html")
 
@@ -75,6 +75,8 @@ def handle_disconnect():
 
 @socketio.on("join_game")
 def handle_join_game(game_code):
+    print(f"Received join_game request for code {game_code}")
+
     if not games.has_game(game_code):
         print(f"Client tried connecting to game {game_code} which does not exist")
         return

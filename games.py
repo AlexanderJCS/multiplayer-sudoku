@@ -52,7 +52,15 @@ class Games:
         del self.players_game_id_map[player_sid]
 
     def game_from_player(self, player_sid):
+        player = self.game_from_id(player_sid)
+
+        if player not in self.id_games_map:
+            raise ValueError(f"Game {self.players_game_id_map[player_sid]} does not exist")
+
         return self.id_games_map[self.players_game_id_map[player_sid]]
 
     def game_from_id(self, game_id):
+        if game_id not in self.id_games_map:
+            raise ValueError(f"Game {game_id} does not exist")
+
         return self.id_games_map[game_id]
