@@ -42,6 +42,8 @@ h1 {
 .players {
     margin: 3vh auto;
     font-size: 25px;
+    height: 60vh;
+    overflow-y: auto;
 }
 
 .color {
