@@ -1,7 +1,5 @@
 
 
-function setAction() {
-    let form = document.getElementById('gameForm');
-    let gameId = document.getElementById('gameId').value;
-    form.action = gameId;
-}
+document.getElementById("join").addEventListener("click", function() {
+    window.location.href = "/" + document.getElementById("gameId").value;
+});

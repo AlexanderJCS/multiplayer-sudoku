@@ -7,20 +7,36 @@
     <link rel="stylesheet" href="../static/homepage/style.css">
 </head>
 <body>
-    <div class="container">
+    <div class="container" id="head_container">
         <div class="header">
             <h1>Multiplayer Sudoku</h1>
         </div>
-        <div class="join_game">
-            <h2>Create or Join Game By Code</h2>
-            <form id="gameForm" onsubmit="setAction()" method="get">
-                <label>
-                    <input id="gameId" type="text" name="game_id" placeholder="Game ID" required>
-                </label>
 
-                <input type="submit" value="Join">
-            </form>
-        </div>
+        <h2>Create or Join Game By Code</h2>
+        <label>
+            <input id="gameId" type="text" name="game_id" placeholder="Game ID" required>
+            <button id="join">Join</button>
+        </label>
+    </div>
+
+    <div class="container" id="description">
+        <h2>How to Play</h2>
+        <p>
+            Magnis tempor commodo sed nostra velit natoque orci. Proin inceptos elit nunc cum parturient ligula class nisi diam! Duis curabitur, primis velit torquent mi nunc tempus fringilla. Posuere dignissim ante posuere facilisis in cubilia lorem ante suspendisse netus massa primis. Scelerisque non venenatis eget malesuada sodales posuere eget potenti nisi? Dictumst massa ac viverra. Penatibus eros maecenas.
+        </p>
+        <p>
+            Tempus semper placerat, a massa dictum. Phasellus leo ligula in nibh tellus. Scelerisque inceptos, auctor eleifend maecenas hendrerit. Porta donec malesuada metus ad. Interdum in nascetur diam ut. Commodo consectetur dis mattis nullam magna hendrerit posuere consectetur euismod lectus natoque etiam. Dictumst morbi inceptos tempor inceptos lacinia. Torquent ultricies ullamcorper nunc enim. Porttitor nascetur mi porttitor facilisi. Hendrerit ante augue habitant consequat consectetur. Consectetur dignissim maecenas malesuada hendrerit.
+        </p>
+        <p>
+            Consectetur tristique nec maecenas convallis tristique rutrum euismod eleifend laoreet metus fusce. Ultricies ad at montes interdum semper nibh nascetur rhoncus egestas? Arcu vitae congue risus euismod donec pretium dapibus diam accumsan proin aenean. Et nam a facilisis ac gravida. Nam torquent felis feugiat aliquam scelerisque tincidunt phasellus ornare. Fermentum ultricies vestibulum rhoncus quis felis dapibus gravida pellentesque facilisi et leo nibh. Nisi pretium.
+        </p>
+        <p>
+            Quisque elit porttitor potenti ipsum purus felis egestas lorem facilisi sociis mauris aliquam! Tempor etiam vel adipiscing rutrum phasellus eget et. Lacinia facilisis viverra mattis pharetra tempor gravida aenean vehicula potenti litora. Varius habitasse dapibus purus, fringilla consequat. Integer cubilia purus cum etiam habitant hendrerit penatibus sagittis tortor purus! Class natoque dui accumsan cras cursus vivamus leo porta ultricies blandit curabitur? Conubia scelerisque dapibus auctor ut volutpat natoque sem. Gravida lacus aptent ligula natoque libero. Sollicitudin nunc at sollicitudin rhoncus etiam semper aenean platea.
+        </p>
+        <p>
+            Augue ridiculus inceptos vel at quisque tellus.
+            Aliquet adipiscing volutpat bibendum sodales facilisis. Nibh pretium fringilla lobortis semper. Primis duis quisque dapibus posuere. Vestibulum mus sagittis cursus egestas parturient egestas himenaeos. Molestie nisi sociis molestie nam. Vestibulum tortor vivamus posuere vitae orci arcu neque potenti sagittis convallis. Diam accumsan cubilia nullam nulla ante. Ligula.
+        </p>
     </div>
 
     <script src="../static/homepage/join.js"></script>
