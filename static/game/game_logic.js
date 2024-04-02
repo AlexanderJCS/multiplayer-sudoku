@@ -67,7 +67,7 @@ function togglePencil() {
     pencilMode.toggle();
 
     let button = document.getElementById("toggle-pencil");
-    button.src = pencilMode.get() ? "../static/images/pencil.png" : "../static/images/pen.png";
+    button.src = pencilMode.get() ? "../static/game/images/pencil.png" : "../static/game/images/pen.png";
 }
 
 
