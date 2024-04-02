@@ -12,10 +12,21 @@ socketio = SocketIO(app, cors_allowed_origins="*")
 games = Games()
 
 
+@app.route("/")
+def index():
+    return render_template("index.html")
+
+
 @app.route("/<game_code>")
-def index(game_code):
+def game(game_code):
     games.add_game(game_code)
     return render_template("game.html")
+
+
+@app.route("/api/get_new_room")
+def get_new_room():
+    game_code = games.get_new_room_id()
+    return {"game_code": game_code}
 
 
 @socketio.on("update_board")

@@ -2,9 +2,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Multiplayer Sudoku</title>
+
+    <link rel="stylesheet" href="../static/homepage/style.css">
 </head>
 <body>
+    <div class="container">
+        <div class="header">
+            <h1>Multiplayer Sudoku</h1>
+        </div>
+        <div class="join_game">
+            <h2>Create or Join Game By Code</h2>
+            <form id="gameForm" onsubmit="setAction()" method="get">
+                <label>
+                    <input id="gameId" type="text" name="game_id" placeholder="Game ID" required>
+                </label>
 
+                <input type="submit" value="Join">
+            </form>
+        </div>
+    </div>
+
+    <script src="../static/homepage/join.js"></script>
 </body>
 </html>

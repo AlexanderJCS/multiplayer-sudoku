@@ -1,6 +1,7 @@
 from flask_socketio import join_room, leave_room
 
 from dataclasses import dataclass
+import string
 
 from player_list import PlayerList
 from board import Board
@@ -17,6 +18,17 @@ class Games:
     def __init__(self):
         self.id_games_map: dict[str, Game] = {}
         self.players_game_id_map: dict[str, str] = {}
+
+    def get_new_room_id(self):
+        game_id = "NOT_UNIQUE"
+
+        for _ in range(100):
+            game_id = "".join([string.ascii_uppercase[i] for i in range(5)])
+
+            if not self.has_game(game_id):
+                return game_id
+
+        return game_id
 
     def has_game(self, game_id) -> bool:
         return game_id in self.id_games_map
