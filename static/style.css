@@ -77,11 +77,11 @@ h1 {
 }
 
 .box:hover {
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
 }
 
 .box:active {
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5) inset;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5) inset;
     transition-duration: 0.2s;
 }
 
@@ -89,23 +89,6 @@ h1 {
     margin-right: 15px;
 }
 
-/* this is kinda goob but it works */
-.box:nth-child(27n+19),
-.box:nth-child(27n+20),
-.box:nth-child(27n+21),
-.box:nth-child(27n+22),
-.box:nth-child(27n+23),
-.box:nth-child(27n+24),
-.box:nth-child(27n+25),
-.box:nth-child(27n+26),
-.box:nth-child(27n+27) {
+.box:nth-child(27n) {
     margin-bottom: 15px;
-}
-
-.box:nth-child(9n) {
-    
-}
-
-.box:nth-child(72) ~ .box {
-    
 }
