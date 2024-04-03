@@ -12,6 +12,10 @@ class PlayerList:
         self.players: dict[str, Player] = {}
         self.player_counter = 1
 
+    def modify_player(self, sid: str, name: str, color: str):
+        self.players[hash_sid(sid)].name = name
+        self.players[hash_sid(sid)].color = color
+
     def add_player(self, sid):
         self.players[hash_sid(sid)] = Player(f"Player {self.player_counter}")
         self.player_counter += 1

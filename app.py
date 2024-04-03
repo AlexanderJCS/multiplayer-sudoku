@@ -3,7 +3,6 @@ from flask_socketio import SocketIO, emit
 
 from games import Games
 
-
 app = Flask(__name__)
 # TODO: Add the SECRET_KEY configuration to the app object.
 
@@ -36,7 +35,7 @@ def handle_message(message):
             or not isinstance(message["loc"], int) or not isinstance(message["value"], int)  # check data types of keys
             or message["loc"] < 0 or message["loc"] >= 81  # check bounds of location
             or message["value"] < 0 or message["value"] > 9):  # check bounds of value
-        
+
         print(f"ERROR: Invalid message received {message}")
         return
 
@@ -53,7 +52,6 @@ def handle_pencil_mark(message):
             or not isinstance(message["loc"], int) or not isinstance(message["value"], str)  # check data types of keys
             or message["loc"] < 0 or message["loc"] >= 81  # check bounds of location
             or (not message["value"].isdigit() and len(message) == 0) or "0" in message["value"]):
-
         print(f"ERROR: Invalid pencilMark message received {message}")
         return
 
@@ -86,6 +84,18 @@ def handle_join_game(game_code):
 
     emit("board_data", game.board.get_init_data())
     emit("players", game.player_list.as_dict(), room=game.id)
+
+
+@socketio.on("update_player")
+def update_player(player_data):
+    if "name" in player_data and "color" in player_data \
+            and isinstance(player_data["name"], str) and isinstance(player_data["color"], str) \
+            and len(player_data["name"]) > 0:
+
+        game = games.game_from_player(request.sid)
+        game.player_list.modify_player(request.sid, player_data["name"], player_data["color"])
+
+        emit("players", game.player_list.as_dict(), room=game.id)
 
 
 @socketio.on("connect")

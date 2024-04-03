@@ -334,6 +334,16 @@ function getBoxes() {
 }
 
 
+function submitConfig(event) {
+    event.preventDefault();
+
+    let name = document.getElementById("player_name").value;
+    let color = document.getElementById("player_color").value;
+
+    socket.emit("update_player", {name: name, color: color});
+}
+
+
 function init() {
     genGrid();
     updateBoard();
@@ -343,6 +353,8 @@ function init() {
     })
 
     document.getElementById("toggle-pencil").addEventListener("mousedown", togglePencil);
+
+    document.getElementById('player_config').addEventListener('submit', submitConfig);
 
 
     document.addEventListener("keydown", onKeyPress);
