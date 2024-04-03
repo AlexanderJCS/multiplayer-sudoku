@@ -5,14 +5,17 @@
     <title>Multiplayer Sudoku</title>
 
     <link rel="stylesheet" href="../static/homepage/style.css">
+
+    
 </head>
 <body>
     <div class="container" id="head_container">
         <div class="header">
             <h1>Multiplayer Sudoku</h1>
         </div>
-
-        <h2>Create or Join Game By Code</h2>
+        <br>
+        <br>
+        <h6 style="margin-bottom: 5px;">Create or Join Game By Code</h6>
         <label>
             <input id="gameId" type="text" name="game_id" placeholder="Game ID" required>
             <button id="join">Join</button>
@@ -21,22 +24,50 @@
 
     <div class="container" id="description">
         <h2>How to Play</h2>
+        <h4>Joining a Game</h4>
         <p>
-            Magnis tempor commodo sed nostra velit natoque orci. Proin inceptos elit nunc cum parturient ligula class nisi diam! Duis curabitur, primis velit torquent mi nunc tempus fringilla. Posuere dignissim ante posuere facilisis in cubilia lorem ante suspendisse netus massa primis. Scelerisque non venenatis eget malesuada sodales posuere eget potenti nisi? Dictumst massa ac viverra. Penatibus eros maecenas.
+            Upon loading the game page, you'll be prompted to join an existing game or create a new one. If you're starting fresh, create a game and share the unique game code with your friends to play together. If you've been invited to a game, simply enter the provided code to join.
         </p>
+    
+        <h4>Understanding the Board</h4>
         <p>
-            Tempus semper placerat, a massa dictum. Phasellus leo ligula in nibh tellus. Scelerisque inceptos, auctor eleifend maecenas hendrerit. Porta donec malesuada metus ad. Interdum in nascetur diam ut. Commodo consectetur dis mattis nullam magna hendrerit posuere consectetur euismod lectus natoque etiam. Dictumst morbi inceptos tempor inceptos lacinia. Torquent ultricies ullamcorper nunc enim. Porttitor nascetur mi porttitor facilisi. Hendrerit ante augue habitant consequat consectetur. Consectetur dignissim maecenas malesuada hendrerit.
+            The game board consists of a 9x9 grid divided into smaller 3x3 subgrids. Your goal is to fill in each cell of the grid with a number from 1 to 9. However, each number can only appear once in each row, column, and subgrid.
         </p>
+    
+        <h4>Interacting with the Board</h4>
         <p>
-            Consectetur tristique nec maecenas convallis tristique rutrum euismod eleifend laoreet metus fusce. Ultricies ad at montes interdum semper nibh nascetur rhoncus egestas? Arcu vitae congue risus euismod donec pretium dapibus diam accumsan proin aenean. Et nam a facilisis ac gravida. Nam torquent felis feugiat aliquam scelerisque tincidunt phasellus ornare. Fermentum ultricies vestibulum rhoncus quis felis dapibus gravida pellentesque facilisi et leo nibh. Nisi pretium.
+            To select a cell on the board, simply click on it. Once selected, you can input a number by typing it on your keyboard. If you make a mistake, you can erase the number by pressing the delete or backspace key.
         </p>
+    
+        <h4>Pencil Mode</h4>
         <p>
-            Quisque elit porttitor potenti ipsum purus felis egestas lorem facilisi sociis mauris aliquam! Tempor etiam vel adipiscing rutrum phasellus eget et. Lacinia facilisis viverra mattis pharetra tempor gravida aenean vehicula potenti litora. Varius habitasse dapibus purus, fringilla consequat. Integer cubilia purus cum etiam habitant hendrerit penatibus sagittis tortor purus! Class natoque dui accumsan cras cursus vivamus leo porta ultricies blandit curabitur? Conubia scelerisque dapibus auctor ut volutpat natoque sem. Gravida lacus aptent ligula natoque libero. Sollicitudin nunc at sollicitudin rhoncus etiam semper aenean platea.
+            If you're unsure about a number but want to keep it in mind, you can enable pencil mode by clicking the pencil icon. In this mode, you can add small numbers (pencil marks) to a cell to indicate potential options. Toggle pencil mode on and off as needed.
         </p>
+    
+        <h4>Playing with Friends</h4>
         <p>
-            Augue ridiculus inceptos vel at quisque tellus.
-            Aliquet adipiscing volutpat bibendum sodales facilisis. Nibh pretium fringilla lobortis semper. Primis duis quisque dapibus posuere. Vestibulum mus sagittis cursus egestas parturient egestas himenaeos. Molestie nisi sociis molestie nam. Vestibulum tortor vivamus posuere vitae orci arcu neque potenti sagittis convallis. Diam accumsan cubilia nullam nulla ante. Ligula.
+            This game supports multiplayer functionality, allowing you to play with friends in real-time. You can see each other's moves and progress on the board. Work together to solve the puzzle efficiently!
         </p>
+    
+        <h4>Checking for Mistakes</h4>
+        <p>
+            If you're unsure whether your board is correct, you can check for mistakes by clicking the "Check" button. Incorrect numbers will be highlighted in red, helping you identify and correct errors.
+        </p>
+        <h4>Communicating with Players</h4>
+        <p>
+            Use the chat feature to communicate with other players in the game. Discuss strategies, share hints, or simply chat while playing.
+        </p>
+
+        <h4>Winning the Game</h4>
+        <p>
+            The game is won when every cell on the board is filled correctly according to Sudoku rules. Once you've completed the puzzle, celebrate your victory with your fellow players!
+        </p>
+
+        <h4>Enjoying the Experience</h4>
+        <p>
+            Sudoku is a game of logic and strategy, offering a challenging yet rewarding experience. Take your time, think ahead, and enjoy the thrill of solving puzzles together with friends.
+        </p>
+
     </div>
 
     <script src="../static/homepage/join.js"></script>
