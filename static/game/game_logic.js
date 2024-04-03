@@ -175,10 +175,9 @@ function updatePlayerList() {
  * Gets the boxes within the selection. Used for removing pencil marks when adding a correct number.
  */
 function getBoxesInSelection(boxID) {
-    let boxes = getBoxes();
+    // TODO: refactor - lots in common with the highlightBoxes function
     let [row, col] = getRowCol(boxID);
     let gridTopLeft = getGridTopLeft(boxID);
-    let num = sudokuBoard[boxID];
 
     let selection = []
 
