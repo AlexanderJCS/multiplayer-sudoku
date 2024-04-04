@@ -16,6 +16,9 @@ class PlayerList:
         self.players[hash_sid(sid)].name = name
         self.players[hash_sid(sid)].color = color
 
+    def get_player(self, sid: str):
+        return self.players[hash_sid(sid)]
+
     def add_player(self, sid):
         self.players[hash_sid(sid)] = Player(f"Player {self.player_counter}")
         self.player_counter += 1
@@ -31,6 +34,7 @@ class PlayerList:
 class Player:
     name: str
     color: str = None
+    pos: int = None
 
     def __post_init__(self):
         self.color = (

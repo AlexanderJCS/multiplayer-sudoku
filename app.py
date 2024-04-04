@@ -91,11 +91,24 @@ def update_player(player_data):
     if "name" in player_data and "color" in player_data \
             and isinstance(player_data["name"], str) and isinstance(player_data["color"], str) \
             and len(player_data["name"]) > 0:
-
         game = games.game_from_player(request.sid)
         game.player_list.modify_player(request.sid, player_data["name"], player_data["color"])
 
         emit("players", game.player_list.as_dict(), room=game.id)
+
+
+@socketio.on("move_cursor")
+def handle_move_cursor(cursor_data):
+    if "pos" not in cursor_data or \
+            not isinstance(cursor_data["pos"], int) \
+            or cursor_data["pos"] < 0 \
+            or cursor_data["pos"] >= 81:
+        print(f"Invalid cursor data: {cursor_data}")
+
+    game = games.game_from_player(request.sid)
+    player = game.player_list.get_player(request.sid)
+    player.pos = cursor_data["pos"]
+    emit("players", game.player_list.as_dict(), room=game.id)
 
 
 @socketio.on("connect")
@@ -104,4 +117,4 @@ def handle_connect():
 
 
 if __name__ == "__main__":
-    socketio.run(app, host="127.0.0.1", use_reloader=False, log_output=True)
+    socketio.run(app, host="127.0.0.1", port=3942, use_reloader=False, log_output=True, allow_unsafe_werkzeug=True)
