@@ -153,6 +153,7 @@ function updatePlayerList() {
         playerList.innerHTML = "";
 
         for (let player of Object.values(players)) {
+            // Create the player object in the player list
             let playerDiv = document.createElement("div");
             playerDiv.classList.add("player");
 
@@ -167,6 +168,11 @@ function updatePlayerList() {
             playerDiv.appendChild(nameDiv);
 
             playerList.appendChild(playerDiv);
+
+            // Add the highlight of the boxes
+            if (player.pos !== null) {
+                document.getElementById(player.pos.toString()).backgroundColor = player.color;
+            }
         }
     });
 }
