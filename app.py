@@ -117,4 +117,4 @@ def handle_connect():
 
 
 if __name__ == "__main__":
-    socketio.run(app, host="127.0.0.1", port=3942, use_reloader=False, log_output=True, allow_unsafe_werkzeug=True)
+    socketio.run(app, host="127.0.0.1", use_reloader=False, log_output=True)

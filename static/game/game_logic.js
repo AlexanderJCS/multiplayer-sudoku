@@ -28,7 +28,7 @@ let selectedBox = null;
 /**
  * The socket that connects to the server. Will be null until initialized in the init() function.
  */
-let socket = io.connect("http://localhost:3942");
+let socket = io.connect("http://localhost:5000");
 
 let players = {};
 
