@@ -20,15 +20,15 @@ let correctBoard = Array(81).fill(0);
 let originalBoard = Array(81).fill(0);
 
 /**
- * The index of the currently selected box. -1 if no box is selected.
+ * The index of the currently selected box. null if no box is selected.
  * @type {number}
  */
-let selectedBox = -1;
+let selectedBox = null;
 
 /**
  * The socket that connects to the server. Will be null until initialized in the init() function.
  */
-let socket = io.connect("http://localhost:5000");
+let socket = io.connect("http://localhost:3942");
 
 let players = {};
 
@@ -54,12 +54,13 @@ function boxClicked(e) {
     let toSelect = parseInt(e.target.id);
 
     if (selectedBox === toSelect) {  // unselect box if it's already selected
-        selectedBox = -1;
+        selectedBox = null;
     } else {
         selectedBox = toSelect;
     }
 
     updateBoard();
+    socket.emit("move_cursor", {"pos": toSelect});
 }
 
 
@@ -72,7 +73,7 @@ function togglePencil() {
 
 
 function onKeyPress(e) {
-    if (selectedBox === -1 || originalBoard[selectedBox] !== 0) {
+    if (selectedBox === null || originalBoard[selectedBox] !== 0) {
         return;
     }
 
@@ -152,6 +153,7 @@ function updatePlayerList() {
         playerList.innerHTML = "";
 
         for (let player of Object.values(players)) {
+            // Create the player object in the player list
             let playerDiv = document.createElement("div");
             playerDiv.classList.add("player");
 
@@ -166,6 +168,11 @@ function updatePlayerList() {
             playerDiv.appendChild(nameDiv);
 
             playerList.appendChild(playerDiv);
+
+            // Add the highlight of the boxes
+            if (player.pos !== null) {
+                document.getElementById(player.pos.toString()).backgroundColor = player.color;
+            }
         }
     });
 }
