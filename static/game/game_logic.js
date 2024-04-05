@@ -152,6 +152,10 @@ function updatePlayerList() {
     elementsByClass("players").forEach((playerList) => {
         playerList.innerHTML = "";
 
+        for (let box of getBoxes()) {
+            box.style.backgroundColor = "";
+        }
+
         for (let player of Object.values(players)) {
             // Create the player object in the player list
             let playerDiv = document.createElement("div");
@@ -171,7 +175,7 @@ function updatePlayerList() {
 
             // Add the highlight of the boxes
             if (player.pos !== null) {
-                document.getElementById(player.pos.toString()).backgroundColor = player.color;
+                document.getElementById(player.pos.toString()).style.backgroundColor = player.color;
             }
         }
     });
