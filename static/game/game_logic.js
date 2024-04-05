@@ -352,6 +352,7 @@ function init() {
         console.log("Connected to server");
 
         let gameCode = window.location.pathname.split('/')[1];
+        console.log("Joining game: " + gameCode);
         socket.emit("join_game", gameCode);
     });
 
