@@ -358,6 +358,9 @@ function init() {
 
     socket.on("connect_error", (error) => {
         console.log("CONNECT ERROR: " + error);
+        console.log("Message: " + error.message);
+        console.log("Description: " + error.description);
+        console.log("Context: " + error.context);
     });
 
     socket.on("board_data", (data) => {

@@ -88,6 +88,11 @@ def handle_join_game(game_code):
     emit("players", game.player_list.as_dict(), room=game.id)
 
 
+@socketio.on("connection_error")
+def handle_connection_error(message):
+    print(f"Received connection_error message: {message}")
+
+
 @socketio.on("connect")
 def handle_connect():
     print(f"Received connection from {request.sid}")
