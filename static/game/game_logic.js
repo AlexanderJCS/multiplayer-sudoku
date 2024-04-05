@@ -350,6 +350,9 @@ function init() {
     // TODO: refactor - put this in a separate function
     socket.on("connect", () => {
         console.log("Connected to server");
+
+        let gameCode = window.location.pathname.split('/')[1];
+        socket.emit("join_game", gameCode);
     });
 
     socket.on("disconnect", () => {
@@ -396,10 +399,6 @@ function init() {
         sudokuBoard[data.loc] = 0;  // clear the box if there's a pencil mark
         updateBoard();
     });
-
-    let gameCode = window.location.pathname.split('/')[1];
-
-    socket.emit("join_game", gameCode);
 }
 
 window.onload = init;
