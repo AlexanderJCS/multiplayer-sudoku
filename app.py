@@ -86,6 +86,7 @@ def handle_join_game(game_code):
     emit("players", game.player_list.as_dict(), room=game.id)
 
 
+
 @socketio.on("update_player")
 def update_player(player_data):
     if "name" in player_data and "color" in player_data \
@@ -104,13 +105,17 @@ def handle_move_cursor(cursor_data):
             or cursor_data["pos"] < -1 \
             or cursor_data["pos"] >= 81:
         print(f"Invalid cursor data: {cursor_data}")
-        
-    print(cursor_data)
     
     game = games.game_from_player(request.sid)
     player = game.player_list.get_player(request.sid)
     player.pos = cursor_data["pos"]
     emit("players", game.player_list.as_dict(), room=game.id)
+
+
+@socketio.on("connection_error")
+def handle_connection_error(message):
+    print(f"Received connection_error message: {message}")
+
 
 
 @socketio.on("connect")

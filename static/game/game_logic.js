@@ -402,6 +402,10 @@ function init() {
     // TODO: refactor - put this in a separate function
     socket.on("connect", () => {
         console.log("Connected to server");
+
+        let gameCode = window.location.pathname.split('/')[1];
+        console.log("Joining game: " + gameCode);
+        socket.emit("join_game", gameCode);
     });
 
     socket.on("disconnect", () => {
@@ -410,6 +414,9 @@ function init() {
 
     socket.on("connect_error", (error) => {
         console.log("CONNECT ERROR: " + error);
+        console.log("Message: " + error.message);
+        console.log("Description: " + error.description);
+        console.log("Context: " + error.context);
     });
 
     socket.on("board_data", (data) => {
@@ -445,10 +452,6 @@ function init() {
         sudokuBoard[data.loc] = 0;  // clear the box if there's a pencil mark
         updateBoard();
     });
-
-    let gameCode = window.location.pathname.split('/')[1];
-
-    socket.emit("join_game", gameCode);
 }
 
 window.onload = init;
