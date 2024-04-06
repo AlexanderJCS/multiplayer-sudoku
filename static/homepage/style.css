@@ -66,6 +66,9 @@ input[type="text"] {
     background-color: var(--accent);
 }
 
+input[type="text"]:focus {
+    outline: none;
+}
 
 button {
     padding: 10px 20px;

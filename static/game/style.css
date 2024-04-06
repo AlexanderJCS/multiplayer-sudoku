@@ -42,7 +42,7 @@ h1 {
 .players {
     margin: 3vh auto;
     font-size: 25px;
-    height: 60vh;
+    height: 40vh;
     overflow-y: auto;
 }
 
@@ -92,6 +92,44 @@ h1 {
     background-color: var(--wrong-color);
     color: inherit;
     border-color: inherit;
+}
+
+#player_config {
+    display: flex;
+    flex-direction: column;
+}
+
+input[type="text"], input[type="color"], button#submit_name {
+    flex: 1;
+    font-size: 16px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    border: 1px solid var(--line-color);
+    height: 40px;
+}
+
+
+input[type="text"] {
+    padding: 10px;
+    margin-right: 10px;
+    /*background-color: var(--accented-background-color);*/
+}
+
+
+input[type="color"] {
+    /* Fix the color picker being too high */
+    position: relative;
+    transform: translateY(32%);
+}
+
+input[type="text"]:focus {
+    outline: none;
+}
+
+button#submit_name {
+    width: 100%;
+    background-color: var(--background);
+    cursor: pointer;
 }
 
 .box.pencilMark {
