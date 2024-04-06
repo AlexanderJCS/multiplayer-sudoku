@@ -73,7 +73,7 @@ function togglePencil() {
 
 
 function onKeyPress(e) {
-    if (selectedBox === -1 || originalBoard[selectedBox] !== -1) {
+    if (selectedBox === -1 || originalBoard[selectedBox] !== 0) {
         return;
     }
 
@@ -85,11 +85,9 @@ function onKeyPress(e) {
 
     if (pencilMode.get()) {
         addPencilMark(num);
-        updateBoard();
-        return;
+    } else {
+        addPenMark(num);
     }
-
-    addPenMark(num);
 
     updateBoard();
 }
