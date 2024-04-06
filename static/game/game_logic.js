@@ -20,13 +20,13 @@ let correctBoard = Array(81).fill(0);
 let originalBoard = Array(81).fill(0);
 
 /**
- * The index of the currently selected box. null if no box is selected.
+ * The index of the currently selected box. 0 if no box is selected.
  * @type {number}
  */
-let selectedBox = null;
+let selectedBox = -1;
 
 /**
- * The socket that connects to the server. Will be null until initialized in the init() function.
+ * The socket that connects to the server.
  */
 let socket = io.connect("http://localhost:5000");
 
@@ -54,13 +54,13 @@ function boxClicked(e) {
     let toSelect = parseInt(e.target.id);
 
     if (selectedBox === toSelect) {  // unselect box if it's already selected
-        selectedBox = null;
+        selectedBox = -1;
     } else {
         selectedBox = toSelect;
     }
 
     updateBoard();
-    socket.emit("move_cursor", {"pos": toSelect});
+    socket.emit("move_cursor", {"pos": selectedBox});
 }
 
 
@@ -73,7 +73,7 @@ function togglePencil() {
 
 
 function onKeyPress(e) {
-    if (selectedBox === null || originalBoard[selectedBox] !== 0) {
+    if (selectedBox === -1 || originalBoard[selectedBox] !== -1) {
         return;
     }
 
@@ -174,8 +174,10 @@ function updatePlayerList() {
             playerList.appendChild(playerDiv);
 
             // Add the highlight of the boxes
-            if (player.pos !== null) {
-                document.getElementById(player.pos.toString()).style.backgroundColor = player.color;
+            if (player.pos !== -1 && player.pos !== selectedBox) {
+                let rgb = hexToRgb(player.color);
+                document.getElementById(player.pos.toString()).style.backgroundColor =
+                    "rgba(" + rgb.r + ", " + rgb.g + ", " + rgb.b + ", 0.5)";
             }
         }
     });
@@ -187,6 +189,10 @@ function updatePlayerList() {
  */
 function getBoxesInSelection(boxID) {
     // TODO: refactor - lots in common with the highlightBoxes function
+    if (boxID === -1) {
+        return;
+    }
+
     let [row, col] = getRowCol(boxID);
     let gridTopLeft = getGridTopLeft(boxID);
 
@@ -210,6 +216,10 @@ function getBoxesInSelection(boxID) {
  */
 function highlightBoxes(boxID) {
     unhighlightBoxes();
+
+    if (boxID === -1) {
+        return;
+    }
 
     let boxes = getBoxes();
     let [row, col] = getRowCol(boxID);
@@ -351,6 +361,26 @@ function submitConfig(event) {
     let color = document.getElementById("player_color").value;
 
     socket.emit("update_player", {name: name, color: color});
+}
+
+
+function hexToRgb(color) {
+    // Check if the input is already in RGB format
+    if (typeof color === 'string' && color.startsWith('rgb')) {
+        let rgbValues = color.match(/\d+/g); // match and get all numbers
+        return {
+            r: parseInt(rgbValues[0]),
+            g: parseInt(rgbValues[1]),
+            b: parseInt(rgbValues[2])
+        };
+    }
+
+    // If not, convert from hex to RGB
+    let r = parseInt(color.slice(1, 3), 16);
+    let g = parseInt(color.slice(3, 5), 16);
+    let b = parseInt(color.slice(5, 7), 16);
+
+    return {r, g, b};
 }
 
 

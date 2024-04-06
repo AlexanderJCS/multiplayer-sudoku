@@ -34,7 +34,7 @@ class PlayerList:
 class Player:
     name: str
     color: str = None
-    pos: int = None
+    pos: int = -1
 
     def __post_init__(self):
         self.color = (

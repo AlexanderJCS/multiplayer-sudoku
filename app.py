@@ -100,11 +100,13 @@ def update_player(player_data):
 @socketio.on("move_cursor")
 def handle_move_cursor(cursor_data):
     if "pos" not in cursor_data or \
-            not isinstance(cursor_data["pos"], int) \
-            or cursor_data["pos"] < 0 \
+            not (isinstance(cursor_data["pos"], int) or cursor_data["pos"] is None) \
+            or cursor_data["pos"] < -1 \
             or cursor_data["pos"] >= 81:
         print(f"Invalid cursor data: {cursor_data}")
-
+        
+    print(cursor_data)
+    
     game = games.game_from_player(request.sid)
     player = game.player_list.get_player(request.sid)
     player.pos = cursor_data["pos"]
