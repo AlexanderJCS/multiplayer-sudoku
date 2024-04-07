@@ -72,8 +72,19 @@ function togglePencil() {
 }
 
 
+function wonGame() {
+    for (let i = 0; i < 81; i++) {
+        if (sudokuBoard[i] !== correctBoard[i]) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+
 function onKeyPress(e) {
-    if (selectedBox === -1 || originalBoard[selectedBox] !== 0) {
+    if (selectedBox === -1 || originalBoard[selectedBox] !== 0 || wonGame()) {
         return;
     }
 
@@ -90,6 +101,55 @@ function onKeyPress(e) {
     }
 
     updateBoard();
+}
+
+
+function onGameWon() {
+    for (box of getBoxes()) {
+        box.classList.add("won");
+    }
+
+    // Fire confetti
+
+    let count = 200;
+    let defaults = {
+      origin: { y: 0.7 }
+    };
+
+    function fire(particleRatio, opts) {
+      confetti({
+        ...defaults,
+        ...opts,
+        particleCount: Math.floor(count * particleRatio)
+      });
+    }
+
+    fire(0.25, {
+      spread: 26,
+      startVelocity: 55,
+    });
+
+    fire(0.2, {
+      spread: 60,
+    });
+
+    fire(0.35, {
+      spread: 100,
+      decay: 0.91,
+      scalar: 0.8
+    });
+
+    fire(0.1, {
+      spread: 120,
+      startVelocity: 25,
+      decay: 0.92,
+      scalar: 1.2
+    });
+
+    fire(0.1, {
+      spread: 120,
+      startVelocity: 45,
+    });
 }
 
 
@@ -430,6 +490,10 @@ function init() {
         sudokuBoard = data["currentBoard"];
         pencilBoard = data["pencilBoard"];
         updateBoard();
+
+        if (wonGame()) {
+            onGameWon();
+        }
     });
 
     socket.on("players", (data) => {
@@ -448,6 +512,10 @@ function init() {
         sudokuBoard[data.loc] = data.value;
         pencilBoard[data.loc] = "";  // clear pencil marks when a value is added
         updateBoard();
+
+        if (wonGame()) {
+            onGameWon();
+        }
     });
 
     socket.on("pencil_mark", (data) => {
