@@ -167,6 +167,9 @@ button#submit_name {
     border-radius: 10px;
     transition-duration: 0.1s;
     transition-property: background-color, border-color, box-shadow;
+    word-wrap: break-word;
+    word-break: break-all;
+    line-height: 0.8;
 }
 
 .box:hover {

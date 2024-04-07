@@ -123,7 +123,7 @@ function addPencilMark(num, loc=selectedBox) {
 
     if (currentMarks.includes(num.toString())) {
         pencilBoard[loc] = currentMarks.replace(num.toString(), "");
-    } else if (currentMarks.length < 5) {
+    } else {
         pencilBoard[loc] += num.toString();
         pencilBoard[loc] = pencilBoard[selectedBox].split("").sort().join("");
     }
@@ -291,7 +291,7 @@ function updatePencilMarks() {
 
         // set the font size based on the length of the innerText
         // 0.75 is an arbitrary value that seems to work well
-        let fontSizeFactor = Math.pow(box.innerText.length, 0.75);
+        let fontSizeFactor = Math.min(Math.pow(box.innerText.length, 0.75), Math.pow(5, 0.75));
         box.style.fontSize = `min(calc(80vw / 9 / ${fontSizeFactor}), calc(80vh / 9 / ${fontSizeFactor}))`;
         box.classList.add("pencilMark");
     }
