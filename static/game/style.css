@@ -162,8 +162,8 @@ button#submit_name {
     justify-content: center;
     color: var(--line-color);
     user-select: none;
-    border: 3px solid var(--line-color);
-    margin: 2px;
+    border: min(0.3vw, 0.3vh) solid var(--line-color);
+    margin: min(0.1vw, 0.1vh);
     border-radius: 10px;
     transition-duration: 0.1s;
     transition-property: background-color, border-color, box-shadow;
@@ -179,11 +179,11 @@ button#submit_name {
 }
 
 .box:nth-child(3n) {
-    margin-right: 15px;
+    margin-right: min(1vw, 1vh);
 }
 
 .box:nth-child(27n) {
-    margin-bottom: 15px;
+    margin-bottom: min(1vw, 1vh);
 }
 
 /* Override transition for text properties */
