@@ -51,15 +51,24 @@ class Games:
         leave_room(self.players_game_id_map[player_sid], sid=player_sid)
         del self.players_game_id_map[player_sid]
 
-    def game_from_player(self, player_sid):
+    def game_from_player(self, player_sid) -> Game | None:
+        """
+        Get the game that a player is in
+        :param player_sid: The player's session ID
+        :return: Game game, or None if the player is not in a game
+        """
+        
         if player_sid not in self.players_game_id_map:
-            raise KeyError(f"Game {self.players_game_id_map[player_sid]} does not exist")
+            return None
 
         game_id = self.players_game_id_map[player_sid]
         return self.game_from_id(game_id)
 
-    def game_from_id(self, game_id):
-        if game_id not in self.id_games_map:
-            raise KeyError(f"Game {game_id} does not exist")
-
-        return self.id_games_map[game_id]
+    def game_from_id(self, game_id) -> Game | None:
+        """
+        Get the game object from the game ID
+        :param game_id: The game ID
+        :return: The game, or None if the game does not exist
+        """
+        
+        return self.id_games_map.get(game_id)

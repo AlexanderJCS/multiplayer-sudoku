@@ -41,8 +41,11 @@ def handle_message(message):
 
     game = games.game_from_player(request.sid)
 
+    if game is None:  # player did not properly connect to a game
+        return
+
     game.board.update_from_request(message)
-    emit("update_board", message, room=game.id)
+    emit("update_board", message, to=game.id)
 
 
 @socketio.on("pencil_mark")
@@ -56,9 +59,12 @@ def handle_pencil_mark(message):
         return
 
     game = games.game_from_player(request.sid)
-
+    
+    if game is None:  # player did not properly connect to a game
+        return
+    
     game.board.pencil_mark(message)
-    emit("pencil_mark", message, room=game.id)
+    emit("pencil_mark", message, to=game.id)
 
 
 @socketio.on("disconnect")
@@ -67,8 +73,11 @@ def handle_disconnect():
 
     game = games.game_from_player(request.sid)
 
+    if game is None:  # player did not properly connect to a game
+        return
+
     game.player_list.remove_player(request.sid)
-    emit("players", game.player_list.as_dict(), room=game.id)
+    emit("players", game.player_list.as_dict(), to=game.id)
 
 
 @socketio.on("join_game")
@@ -83,7 +92,7 @@ def handle_join_game(game_code):
     game = games.game_from_player(request.sid)
 
     emit("board_data", game.board.get_init_data())
-    emit("players", game.player_list.as_dict(), room=game.id)
+    emit("players", game.player_list.as_dict(), to=game.id)
 
 
 @socketio.on("update_player")
@@ -92,9 +101,13 @@ def update_player(player_data):
             and isinstance(player_data["name"], str) and isinstance(player_data["color"], str) \
             and len(player_data["name"]) > 0:
         game = games.game_from_player(request.sid)
+        
+        if game is None:  # player did not properly connect to a game
+            return
+        
         game.player_list.modify_player(request.sid, player_data["name"], player_data["color"])
 
-        emit("players", game.player_list.as_dict(), room=game.id)
+        emit("players", game.player_list.as_dict(), to=game.id)
 
 
 @socketio.on("move_cursor")
@@ -106,9 +119,13 @@ def handle_move_cursor(cursor_data):
         print(f"Invalid cursor data: {cursor_data}")
     
     game = games.game_from_player(request.sid)
+    
+    if game is None:  # player did not properly connect to a game
+        return
+    
     player = game.player_list.get_player(request.sid)
     player.pos = cursor_data["pos"]
-    emit("players", game.player_list.as_dict(), room=game.id)
+    emit("players", game.player_list.as_dict(), to=game.id)
 
 
 @socketio.on("connection_error")
