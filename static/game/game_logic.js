@@ -300,7 +300,7 @@ function updateBoxText() {
             box.innerText = "";
         }
 
-        let fontSizeFactor = Math.pow(box.innerText.length, 0.75);
+        let fontSizeFactor = box.innerText.length * 1.25;
         box.style.fontSize = `min(calc(80vw / 9 / ${fontSizeFactor}), calc(80vh / 9 / ${fontSizeFactor}))`;
     }
 }

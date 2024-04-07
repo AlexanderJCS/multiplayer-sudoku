@@ -32,6 +32,23 @@
 {#                    <div class="name">Player Example</div>#}
 {#                </div>#}
             </div>
+
+            <form id="player_config">
+                <div>
+                    <h2 style="text-align: center;">Player Configuration</h2>
+                </div>
+                <div>
+                    {# Here, labels are just so PyCharm stops yelling at me. An actual label here looks ugly #}
+                    <label for="player_name"></label>
+                    <label for="player_color"></label>
+
+                    <input type="text" id="player_name" placeholder="Name" autocomplete="off" required>
+                    <input type="color" id="player_color">
+                </div>
+                <div>
+                    <button id="submit_name">Submit</button>
+                </div>
+            </form>
         </div>
     </div>
 </body>

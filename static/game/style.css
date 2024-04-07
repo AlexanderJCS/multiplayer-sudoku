@@ -26,7 +26,6 @@ body {
 }
 
 h1 {
-    font-size: 54px;
     text-transform: uppercase;
 }
 
@@ -51,16 +50,22 @@ h1 {
     background-color: var(--accented-background-color);
     color: inherit;
     border-color: var(--line-color);
+    font-size: inherit;
+    font-weight: inherit;
 }
 
 .box.superHighlight {
     background-color: var(--super-accented-background-color);
+    font-size: inherit;
+    font-weight: inherit;
 }
 
 .box.wrongColor {
     background-color: var(--wrong-color);
     color: inherit;
     border-color: var(--line-color);
+    font-size: inherit;
+    font-weight: inherit;
 }
 
 .box {
@@ -70,12 +75,12 @@ h1 {
     align-items: center;
     justify-content: center;
     color: var(--line-color);
-    font-size: 64px;
     user-select: none;
     border: 3px solid var(--line-color);
     margin: 2px;
     border-radius: 10px;
     transition-duration: 0.1s;
+    transition-property: background-color, border-color, box-shadow; /* Add transition-property */
 }
 
 .box:hover {
@@ -93,4 +98,9 @@ h1 {
 
 .box:nth-child(27n) {
     margin-bottom: 15px;
+}
+
+/* Override transition for text properties */
+.box * {
+    transition-duration: 0s !important;
 }
