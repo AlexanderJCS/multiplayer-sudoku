@@ -41,7 +41,7 @@ class Games:
 
     def add_player(self, player_sid: str, game_id: str):
         if not self.id_games_map.get(game_id):
-            raise ValueError(f"Game ID {game_id} does not exist, but {player_sid} tried joining it")
+            raise KeyError(f"Game ID {game_id} does not exist, but {player_sid} tried joining it")
 
         self.players_game_id_map[player_sid] = game_id
         self.game_from_player(player_sid).player_list.add_player(player_sid)  # add the player to the player list
