@@ -1,42 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 *{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
 
+
 :root {
-    --correct-text-color: #6b705c;
-    --line-color: #333d29;
-    --thick-line-color: #001219;
-    --wrong-color: #f08080;
-    --accented-background-color: #ddbea9;
-    --super-accented-background-color: #cb997e;
-    --background: #ffe8d6;
-    --pencil-color: #b07b48;
+    --correct-text-color: #84a59d;
+    --line-color: #0c222b;
+    --thick-line-color: #000000;
+    --wrong-color: #f6bd60;
+    --accented-background-color: #f5cac3;
+    --super-accented-background-color: #f28482; 
+    --background: #f7ede2;
 }
 
+
+
 body {
-    background-color: var(--background);
     color: var(--line-color);
     font-family: "Poppins", sans-serif;
     font-weight: 300;
+    background-color: var(--background);
 }
 
 h1 {
-    font-size: 54px;
     text-transform: uppercase;
 }
 
-.main-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .container {
+    display: inline-block;
     padding: 40px;
     height: 100vh;
     background-color: var(--background);
+    vertical-align: middle;
 }
 
 .players {
@@ -44,48 +43,52 @@ h1 {
     font-size: 25px;
     height: 40vh;
     overflow-y: auto;
-}
-
-.color {
-    width: 25px;
-    height: 25px;
-    margin-right: 5px;
-    border-radius: 25%;
-
-    /* fix the box looking too high */
-    position: relative;
-    transform: translateY(25%);
+    padding: 10px;
 }
 
 .player {
     display: flex;
-    justify-content: left;
-    margin: 1vh 0;
+    text-align: center;
+    flex-direction: column;
+    background-color: var(--background);
+    margin-bottom: 10px;
+    
+}
+
+.color {
+    display: inline-block; /* Change from float:left to display:inline-block */
+    width: 25px;
+    height: 25px;
+    margin-right: 5px;
+    border-radius: 25%;
+    vertical-align: middle;
+}
+
+.name {
+    margin-top: -30px;
+    display: inline-block; /* Change from float:right to display:inline-block */
+    vertical-align: middle;
 }
 
 #board {
-    width: min(80vw, 80vh);
+    width: 750px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start;
-    margin: 3vh auto;
-}
-
-#toggle-pencil {
-    cursor: pointer;
-    height: 100px;
-    width: 100px;
-    transform: translateY(25%);  /* move the image down by a percentage of its height to look better on the webpage */
+    margin-top: 40px;
 }
 
 .box.highlight {
     background-color: var(--accented-background-color);
     color: inherit;
-    border-color: inherit;
+    border-color: var(--line-color);
+    font-size: inherit;
+    font-weight: inherit;
 }
 
 .box.superHighlight {
     background-color: var(--super-accented-background-color);
+    font-size: inherit;
+    font-weight: inherit;
 }
 
 .box.wrongColor {
@@ -102,99 +105,88 @@ h1 {
 input[type="text"], input[type="color"], button#submit_name {
     flex: 1;
     font-size: 16px;
-    border-radius: 5px;
+    border-radius: 10px;
     margin-bottom: 10px;
-    border: 1px solid var(--line-color);
+    border: 2px solid var(--line-color);
     height: 40px;
-}
+    font-family: "Poppins", sans-serif;
 
+}
 
 input[type="text"] {
     padding: 10px;
     margin-right: 10px;
-    /*background-color: var(--accented-background-color);*/
+    background-color: var(--background);
+    font-family: "Poppins", sans-serif;
+
 }
 
 
 input[type="color"] {
     /* Fix the color picker being too high */
     position: relative;
-    transform: translateY(32%);
+    transform: translateY(23%);
+    background-color: var(--back);
+    
 }
 
 input[type="text"]:focus {
     outline: none;
+    background-color: var(--accented-background-color);
 }
 
 button#submit_name {
     width: 100%;
     background-color: var(--background);
     cursor: pointer;
+    font-family: "Poppins", sans-serif;
+
 }
 
 .box.pencilMark {
     color: var(--pencil-color);
     border-color: var(--line-color);
+    font-size: inherit;
+    font-weight: inherit;
 }
 
 .box {
-    flex: 0 0 auto;
-    height: min(calc(80vw / 9), calc(80vh / 9));
-    width: min(calc(80vw / 9), calc(80vh / 9));
+    height: 75px;
+    width: 75px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--line-color);
-    font-size: min(calc(80vw / 9 * 0.9), calc(80vh / 9 * 0.9));
     user-select: none;
-    border-right: min(0.3vw, 0.3vh) solid;
-    border-bottom: min(0.3vw, 0.3vh) solid;
+    border: 3px solid var(--line-color);
+    margin: 2px;
+    border-radius: 10px;
+    transition-duration: 0.1s;
+    transition-property: background-color, border-color, box-shadow; /* Add transition-property */
+}
+
+.box:hover {
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+}
+
+.box:active {
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5) inset;
+    transition-duration: 0.2s;
 }
 
 .box:nth-child(3n) {
-    border-right: min(1vw, 1vh) solid;
-    border-color: var(--line-color);
+    margin-right: 15px;
 }
 
-/* this is kinda goob but it works */
-.box:nth-child(27n+19),
-.box:nth-child(27n+20),
-.box:nth-child(27n+21),
-.box:nth-child(27n+22),
-.box:nth-child(27n+23),
-.box:nth-child(27n+24),
-.box:nth-child(27n+25),
-.box:nth-child(27n+26),
-.box:nth-child(27n+27) {
-    border-bottom: min(1vw, 1vh) solid;
-    border-color: var(--line-color);
+.box:nth-child(27n) {
+    margin-bottom: 15px;
 }
 
-/* also goob but it works */
-.box:nth-child(1),
-.box:nth-child(2),
-.box:nth-child(3),
-.box:nth-child(4),
-.box:nth-child(5),
-.box:nth-child(6),
-.box:nth-child(7),
-.box:nth-child(8),
-.box:nth-child(9) {
-    border-top: min(1vw, 1vh) solid;
-    border-color: var(--line-color);
+/* Override transition for text properties */
+.box * {
+    transition-duration: 0s !important;
 }
 
-.box:nth-child(9n) {
-    border-right: min(1vw, 1vh) solid;
-    border-color: var(--line-color);
-}
-
-.box:nth-child(9n + 1) {
-    border-left: min(1vw, 1vh) solid;
-    border-color: var(--line-color);
-}
-
-.box:nth-child(72) ~ .box {
-    border-bottom: min(1vw, 1vh) solid;
-    border-color: var(--line-color);
+.main-container {
+    text-align: center;
 }
