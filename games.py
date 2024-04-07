@@ -53,13 +53,13 @@ class Games:
 
     def game_from_player(self, player_sid):
         if player_sid not in self.players_game_id_map:
-            raise ValueError(f"Game {self.players_game_id_map[player_sid]} does not exist")
+            raise KeyError(f"Game {self.players_game_id_map[player_sid]} does not exist")
 
         game_id = self.players_game_id_map[player_sid]
         return self.game_from_id(game_id)
 
     def game_from_id(self, game_id):
         if game_id not in self.id_games_map:
-            raise ValueError(f"Game {game_id} does not exist")
+            raise KeyError(f"Game {game_id} does not exist")
 
         return self.id_games_map[game_id]
