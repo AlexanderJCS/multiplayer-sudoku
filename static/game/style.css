@@ -16,7 +16,7 @@
     --pencil-color: #84a59d;
     --pencil-background: #516e67;
     --accented-background-color: #f5cac3;
-    --super-accented-background-color: #f28482; 
+    --super-accented-background-color: #f28482;
     --super-accented-outline-color: #ca5351;
     --background: #f7ede2;
 }
@@ -77,7 +77,7 @@ h1 {
 #board {
     height: min(70vh, 70vw);
     display: grid;
-    grid-template-columns: repeat(9, 1fr);
+    grid-template-columns: repeat(9, auto);
     grid-column-gap: 0;
     flex-wrap: wrap;
     margin-top: min(5vh, 5vw);
