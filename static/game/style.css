@@ -12,8 +12,12 @@
     --line-color: #0c222b;
     --thick-line-color: #000000;
     --wrong-color: #f6bd60;
+    --wrong-outline: rgb(199, 145, 65);
+    --pencil-color: #84a59d;
+    --pencil-background: #516e67;
     --accented-background-color: #f5cac3;
     --super-accented-background-color: #f28482; 
+    --super-accented-outline-color: #ca5351;
     --background: #f7ede2;
 }
 
@@ -89,12 +93,13 @@ h1 {
     background-color: var(--super-accented-background-color);
     font-size: inherit;
     font-weight: inherit;
+    border-color: var(--super-accented-outline-color);
 }
 
 .box.wrongColor {
     background-color: var(--wrong-color);
     color: inherit;
-    border-color: inherit;
+    border-color: var(--wrong-outline);
 }
 
 #player_config {
@@ -144,8 +149,9 @@ button#submit_name {
 }
 
 .box.pencilMark {
-    color: var(--pencil-color);
-    border-color: var(--line-color);
+    border-color: var(--pencil-color);
+    background-color: var(--pencil-background);
+    color: white;
     font-size: inherit;
     font-weight: inherit;
 }
