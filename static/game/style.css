@@ -52,15 +52,14 @@ h1 {
 
 .player {
     display: flex;
-    text-align: center;
+    text-align: left;
     flex-direction: column;
     background-color: var(--background);
     margin-bottom: 10px;
-    
 }
 
 .color {
-    display: inline-block; /* Change from float:left to display:inline-block */
+    display: inline-block;
     width: 25px;
     height: 25px;
     margin-right: 5px;
@@ -70,15 +69,18 @@ h1 {
 
 .name {
     margin-top: -30px;
-    display: inline-block; /* Change from float:right to display:inline-block */
-    vertical-align: middle;
+    margin-left: 40px;
+    display: inline-block;
+    vertical-align: top;
 }
 
 #board {
-    width: 750px;
-    display: flex;
+    height: min(70vh, 70vw);
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    grid-column-gap: 0;
     flex-wrap: wrap;
-    margin-top: 40px;
+    margin-top: min(5vh, 5vw);
 }
 
 .box.highlight {
@@ -115,7 +117,6 @@ input[type="text"], input[type="color"], button#submit_name {
     border: 2px solid var(--line-color);
     height: 40px;
     font-family: "Poppins", sans-serif;
-
 }
 
 input[type="text"] {
@@ -126,13 +127,10 @@ input[type="text"] {
 
 }
 
-
 input[type="color"] {
     /* Fix the color picker being too high */
     position: relative;
     transform: translateY(23%);
-    background-color: var(--back);
-    
 }
 
 input[type="text"]:focus {
@@ -157,8 +155,8 @@ button#submit_name {
 }
 
 .box {
-    height: 75px;
-    width: 75px;
+    height: calc(min(70vh / 9));
+    width: calc(min(70vh / 9));
     display: flex;
     align-items: center;
     justify-content: center;
@@ -168,15 +166,15 @@ button#submit_name {
     margin: 2px;
     border-radius: 10px;
     transition-duration: 0.1s;
-    transition-property: background-color, border-color, box-shadow; /* Add transition-property */
+    transition-property: background-color, border-color, box-shadow;
 }
 
 .box:hover {
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 
 .box:active {
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5) inset;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5) inset;
     transition-duration: 0.2s;
 }
 
