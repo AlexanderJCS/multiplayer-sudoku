@@ -182,15 +182,12 @@ function addPenMark(num, loc=selectedBox) {
  * @param loc The location of the box to add the pencil mark to. Defaults to the selected box.
  */
 function addPencilMark(num, loc=selectedBox) {
+    let currentMarks = pencilBoard[loc];
+
     if (num === 0) {
         sudokuBoard[loc] = 0;
         pencilBoard[loc] = "";
-        return;
-    }
-
-    let currentMarks = pencilBoard[loc];
-
-    if (currentMarks.includes(num.toString())) {
+    } else if (currentMarks.includes(num.toString())) {
         pencilBoard[loc] = currentMarks.replace(num.toString(), "");
     } else {
         pencilBoard[loc] += num.toString();
@@ -203,7 +200,6 @@ function addPencilMark(num, loc=selectedBox) {
 
     socket.emit("pencil_mark", {loc: loc, value: pencilBoard[loc]});
 }
-
 
 
 /**
