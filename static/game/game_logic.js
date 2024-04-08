@@ -30,6 +30,9 @@ let selectedBox = -1;
  */
 let socket = io.connect("http://localhost:5000");
 
+/**
+ * A hashmap of players in the game. The key is the player's socket ID. The value is the player object.
+ */
 let players = {};
 
 /**
@@ -223,7 +226,7 @@ function updatePlayerList() {
         playerList.innerHTML = "";
 
         for (let box of getBoxes()) {
-            box.style.backgroundColor = "";
+            box.style.borderColor = "";
         }
 
         for (let player of Object.values(players)) {
@@ -246,8 +249,8 @@ function updatePlayerList() {
             // Add the highlight of the boxes
             if (player.pos !== -1 && player.pos !== selectedBox) {
                 let rgb = hexToRgb(player.color);
-                document.getElementById(player.pos.toString()).style.backgroundColor =
-                    "rgba(" + rgb.r + ", " + rgb.g + ", " + rgb.b + ", 0.5)";
+                document.getElementById(player.pos.toString()).style.borderColor =
+                    "rgba(" + rgb.r + ", " + rgb.g + ", " + rgb.b + ", 0.8)";
             }
         }
     });
@@ -431,6 +434,19 @@ function submitConfig(event) {
     let color = document.getElementById("player_color").value;
 
     socket.emit("update_player", {name: name, color: color});
+
+    // Update the player highlight
+    setHighlightColor(color);
+}
+
+
+function setHighlightColor(color) {
+    let rgb = hexToRgb(color);
+
+    let root = document.documentElement;
+    root.style.setProperty("--super-accented-background-color", `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.5)`);
+    root.style.setProperty("--super-accented-outline-color", `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.8)`);
+    root.style.setProperty("--accented-background-color", `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.2)`);
 }
 
 
@@ -500,6 +516,10 @@ function init() {
         if (wonGame()) {
             onGameWon();
         }
+    });
+
+    socket.on("your_color", (color) => {
+        setHighlightColor(color);
     });
 
     socket.on("players", (data) => {

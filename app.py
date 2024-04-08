@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 from flask_socketio import SocketIO, emit
 
+import player_list as pl
 from games import Games
 
 app = Flask(__name__)
@@ -92,6 +93,7 @@ def handle_join_game(game_code):
     game = games.game_from_player(request.sid)
 
     emit("board_data", game.board.get_init_data())
+    emit("your_color", game.player_list.get_player(request.sid).color)
     emit("players", game.player_list.as_dict(), to=game.id)
 
 
