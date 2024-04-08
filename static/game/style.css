@@ -217,3 +217,21 @@ button#submit_name:active {
 .main-container {
     text-align: center;
 }
+
+#toggle-pencil {
+    border: 2px solid var(--line-color);
+    border-radius: 10px;
+    box-sizing: border-box;
+    padding: 5px;
+    transition-duration: 0.2s;
+}
+
+#toggle-pencil:hover {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    background-color: var(--accented-background-color);
+}
+
+#toggle-pencil:active {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5) inset;
+    background-color: var(--super-accented-background-color);
+}
