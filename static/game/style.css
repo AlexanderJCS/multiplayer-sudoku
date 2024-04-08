@@ -151,7 +151,19 @@ button#submit_name {
     background-color: var(--background);
     cursor: pointer;
     font-family: "Poppins", sans-serif;
+    transition-duration: 0.2s;
+}
 
+button#submit_name:hover {
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+    background-color: var(--accented-background-color);
+
+}
+
+button#submit_name:active {
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5) inset;
+    background-color: var(--super-accented-background-color);
+    transition-duration: 0.2s;
 }
 
 .box.pencilMark {
