@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request
 from flask_socketio import SocketIO, emit
 
-import player_list as pl
 from games import Games
 
 app = Flask(__name__)
