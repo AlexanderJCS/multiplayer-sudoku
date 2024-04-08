@@ -55,7 +55,7 @@ class Games:
         """
         Get the game that a player is in
         :param player_sid: The player's session ID
-        :return: Game game, or None if the player is not in a game
+        :return: The game, or None if the player is not in a game
         """
         
         if player_sid not in self.players_game_id_map:
