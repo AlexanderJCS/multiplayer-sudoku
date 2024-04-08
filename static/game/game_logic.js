@@ -226,7 +226,7 @@ function updatePlayerList() {
         playerList.innerHTML = "";
 
         for (let box of getBoxes()) {
-            box.style.backgroundColor = "";
+            box.style.borderColor = "";
         }
 
         for (let player of Object.values(players)) {
@@ -249,8 +249,8 @@ function updatePlayerList() {
             // Add the highlight of the boxes
             if (player.pos !== -1 && player.pos !== selectedBox) {
                 let rgb = hexToRgb(player.color);
-                document.getElementById(player.pos.toString()).style.backgroundColor =
-                    "rgba(" + rgb.r + ", " + rgb.g + ", " + rgb.b + ", 0.5)";
+                document.getElementById(player.pos.toString()).style.borderColor =
+                    "rgba(" + rgb.r + ", " + rgb.g + ", " + rgb.b + ", 0.8)";
             }
         }
     });
