@@ -108,7 +108,7 @@ def update_player(player_data):
         
         game.player_list.modify_player(request.sid, player_data["name"], player_data["color"])
 
-        emit("players", game.player_list.as_dict(), to=game.id)
+        emit("update_player", game.player_list.get_player(request.sid).__dict__, to=game.id)
 
 
 @socketio.on("move_cursor")
@@ -126,7 +126,7 @@ def handle_move_cursor(cursor_data):
     
     player = game.player_list.get_player(request.sid)
     player.pos = cursor_data["pos"]
-    emit("players", game.player_list.as_dict(), to=game.id)
+    emit("move_cursor", {"player": player.hashed_sid, "pos": cursor_data["pos"]}, to=game.id)
 
 
 @socketio.on("connection_error")

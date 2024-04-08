@@ -530,6 +530,16 @@ function init() {
         updatePlayerList();
     });
 
+    socket.on("update_player", (data) => {
+        players[data["hashed_sid"]] = data;
+        updatePlayerList();
+    });
+
+    socket.on("move_cursor", (data) => {
+        players[data.player].pos = data.pos;
+        updatePlayerList();
+    });
+
     socket.on("update_board", (data) => {
         // Receives location-value pairs from the server and updates the board accordingly.
 

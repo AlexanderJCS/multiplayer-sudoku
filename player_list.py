@@ -20,19 +20,21 @@ class PlayerList:
         return self.players[hash_sid(sid)]
 
     def add_player(self, sid):
-        self.players[hash_sid(sid)] = Player(f"Player {self.player_counter}")
+        hashed = hash_sid(sid)
+        self.players[hash_sid(sid)] = Player(f"Player {self.player_counter}", hashed)
         self.player_counter += 1
 
     def remove_player(self, sid):
         del self.players[hash_sid(sid)]
 
     def as_dict(self):
-        return {hash_sid(sid): profile.__dict__ for sid, profile in self.players.items()}
+        return {sid: profile.__dict__ for sid, profile in self.players.items()}
 
 
 @dataclass
 class Player:
     name: str
+    hashed_sid: str
     color: str = None
     pos: int = -1
 
