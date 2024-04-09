@@ -21,8 +21,6 @@
     --background: #f7ede2;
 }
 
-
-
 body {
     color: var(--line-color);
     font-family: "Poppins", sans-serif;
@@ -46,7 +44,8 @@ h1 {
     margin: 3vh auto;
     font-size: 25px;
     height: 40vh;
-    overflow-y: auto;
+    width: 18vw;
+    overflow: auto;
     padding: 10px;
 }
 
@@ -155,13 +154,13 @@ button#submit_name {
 }
 
 button#submit_name:hover {
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
     background-color: var(--accented-background-color);
 
 }
 
 button#submit_name:active {
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5) inset;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5) inset;
     background-color: var(--super-accented-background-color);
     transition-duration: 0.2s;
 }
