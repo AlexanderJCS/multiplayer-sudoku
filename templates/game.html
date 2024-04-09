@@ -11,6 +11,13 @@
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
 </head>
 <body>
+    <script>
+        /**
+         * The socket that connects to the server.
+         */
+        let socket = io.connect("{{ websocket_connection_url }}");
+    </script>
+
     <script src="../static/game/game_logic.js"></script>
 
     <div class="main-container">

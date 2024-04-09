@@ -3,6 +3,8 @@
 *.iml
 *.xml
 .venv
+./.venv
+secret_key.txt
 __pycache__
 *.pyc
 puzzle-generator/puzzles.db

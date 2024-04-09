@@ -26,11 +26,6 @@ let originalBoard = Array(81).fill(0);
 let selectedBox = -1;
 
 /**
- * The socket that connects to the server.
- */
-let socket = io.connect("http://localhost:5000");
-
-/**
  * A hashmap of players in the game. The key is the player's socket ID. The value is the player object.
  */
 let players = {};

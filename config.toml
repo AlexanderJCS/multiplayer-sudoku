@@ -1,0 +1,6 @@
+[server]
+# The address of the server that the client will connect to
+websocket_connection_url = "127.0.0.1:5000"
+
+# set this to your domain if you have a domain, otherwise the server IP
+cors_allowed_origins = ["http://localhost/*"]

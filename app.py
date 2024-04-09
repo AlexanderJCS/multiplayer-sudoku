@@ -2,11 +2,31 @@ from flask import Flask, render_template, request
 from flask_socketio import SocketIO, emit
 
 from games import Games
+import gen_key
+
+import tomllib
+
+
+with open("config.toml", "rb") as f:
+    CONFIG = tomllib.load(f)
+
 
 app = Flask(__name__)
-# TODO: Add the SECRET_KEY configuration to the app object.
+socketio = SocketIO(app, cors_allowed_origins=CONFIG["server"]["cors_allowed_origins"])
 
-socketio = SocketIO(app, cors_allowed_origins="*")
+try:
+    with open("secret_key.txt", "r") as f:
+        app.config["SECRET_KEY"] = f.read()
+except FileNotFoundError:
+    print(
+        "\nERROR: Secret key file not found.\n"
+        "Generating a temporary secret key for this session. It is highly to set a permanent key.\n"
+        "Please run the gen_key.py script to generate a permenant key"
+        "\n"
+    )
+    
+    app.config["SECRET_KEY"] = gen_key.gen_key()
+
 
 games = Games()
 
@@ -19,13 +39,7 @@ def index():
 @app.route("/<game_code>")
 def game_code_req(game_code):
     games.add_game(game_code)
-    return render_template("game.html")
-
-
-@app.route("/api/get_new_room")
-def get_new_room():
-    game_code = games.get_new_room_id()
-    return {"game_code": game_code}
+    return render_template("game.html", websocket_connection_url=CONFIG["server"]["websocket_connection_url"])
 
 
 @socketio.on("update_board")
