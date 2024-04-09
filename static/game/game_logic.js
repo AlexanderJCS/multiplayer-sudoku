@@ -53,6 +53,24 @@ let pencilMode = (function() {
 })();
 
 
+/**
+ * Whether the views the pencil marks
+ */
+let viewPencilMode = (function() {
+    let mode = true;
+
+    return {
+        toggle: function() {
+            mode = !mode;
+        },
+
+        get: function() {
+            return mode;
+        }
+    };
+})();
+
+
 function boxClicked(e) {
     let toSelect = parseInt(e.target.id);
 
@@ -73,6 +91,17 @@ function togglePencil() {
     let button = document.getElementById("toggle-pencil");
     button.src = pencilMode.get() ? "../static/game/images/pencil.png" : "../static/game/images/pen.png";
 }
+
+
+function toggleViewPencil() {
+    viewPencilMode.toggle();
+
+    let button = document.getElementById("toggle-view-pencil");
+    button.src = viewPencilMode.get() ? "../static/game/images/pencil_vis.png" : "../static/game/images/pencil_inv.png";
+
+    updateBoard();
+}
+
 
 
 function wonGame() {
@@ -341,7 +370,7 @@ function updatePencilMarks() {
     for (let i = 0; i < 81; i++) {
         let box = document.getElementById(i.toString());
 
-        if (pencilBoard[i] === "") {
+        if (pencilBoard[i] === "" || !viewPencilMode.get()) {
             box.classList.remove("pencilMark");
             continue;
         }
@@ -475,6 +504,7 @@ function init() {
     })
 
     document.getElementById("toggle-pencil").addEventListener("mousedown", togglePencil);
+    document.getElementById("toggle-view-pencil").addEventListener("mousedown", toggleViewPencil);
 
     document.getElementById('player_config').addEventListener('submit', submitConfig);
 
