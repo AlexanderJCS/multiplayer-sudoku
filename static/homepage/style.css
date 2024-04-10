@@ -23,7 +23,7 @@ body {
 
 
 h1 {
-    font-size: 54px;
+    font-size: 3.5rem;
 }
 
 h2 {
@@ -32,15 +32,15 @@ h2 {
 }
 
 h4 {
-    margin-bottom: 0px;
+    margin-bottom: 0;
 }
 
 h6 {
-    font-size: 16px;
+    font-size: 1.5rem;
 }
 
 p {
-    margin-top: 0px;
+    margin-top: 0;
 }
 
 #head_container {
@@ -69,7 +69,7 @@ label {
 
 input[type="text"] {
     padding: 10px;
-    font-size: 16px;
+    font-size: 1.2rem;
     border: 2px solid var(--line-color);
     border-radius: 10px;
     background-color: var(--background);
@@ -81,7 +81,7 @@ input[type="text"]:focus {
 
 button {
     padding: 10px 20px;
-    font-size: 16px;
+    font-size: 1.2rem;
     color: var(--background);
     background-color: var(--line-color);
     border: 2px solid var(--line-color);
@@ -103,4 +103,20 @@ button:active {
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5) inset;
 }
 
+@media (max-width: 1200px) {
+    body {
+        font-size: 240%;
+    }
 
+    .container {
+        padding: 5vh 10vw;
+    }
+
+    /*input[type="text"] {*/
+    /*    font-size: 2rem;*/
+    /*}*/
+
+    /*button {*/
+    /*    font-size: 2rem;*/
+    /*}*/
+}
