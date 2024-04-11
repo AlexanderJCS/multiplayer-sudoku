@@ -44,7 +44,7 @@ h1 {
     margin: 3vh auto;
     font-size: 25px;
     height: 40vh;
-    width: 18vw;
+    width: 100%;
     overflow: auto;
     padding: 10px;
 }
@@ -213,6 +213,11 @@ button#submit_name:active {
 
 .main-container {
     text-align: center;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .img-button {
