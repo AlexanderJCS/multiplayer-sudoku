@@ -36,36 +36,51 @@
             </div>
         </div>
 
+        <div id="number-selection">
+            <div class="number" id="num1">1</div>
+            <div class="number" id="num2">2</div>
+            <div class="number" id="num3">3</div>
+            <div class="number" id="num4">4</div>
+            <div class="number" id="num5">5</div>
+            <div class="number" id="num6">6</div>
+            <div class="number" id="num7">7</div>
+            <div class="number" id="num8">8</div>
+            <div class="number" id="num9">9</div>
+            <div class="number" id="num0">⌫</div>
+        </div>
+
         <div class="container">
             <div class="controls">
                 <img class="img-button" id="toggle-pencil" src="../static/game/images/pen.png" alt="Toggle Pencil Mode">
                 <img class="img-button" id="toggle-view-pencil" src="../static/game/images/pencil_vis.png" alt="Toggle View Pencil">
             </div>
 
-            <div class="players">
-                <!-- elements are to be populated in Javascript code -->
-{#                <div class="player">#}
-{#                    <div class="color" style="background-color: red;"></div>#}
-{#                    <div class="name">Player Example</div>#}
-{#                </div>#}
+            <div id="player-section">
+                <div class="players">
+                    <!-- elements are to be populated in Javascript code -->
+    {#                <div class="player">#}
+    {#                    <div class="color" style="background-color: red;"></div>#}
+    {#                    <div class="name">Player Example</div>#}
+    {#                </div>#}
+                </div>
+
+                <form id="player_config">
+                    <div>
+                        <h2 style="text-align: center;">Player Configuration</h2>
+                    </div>
+                    <div>
+                        {# Here, labels are just so PyCharm stops yelling at me. An actual label here looks ugly #}
+                        <label for="player_name"></label>
+                        <label for="player_color"></label>
+
+                        <input type="text" id="player_name" placeholder="Name" autocomplete="off" required>
+                        <input type="color" id="player_color">
+                    </div>
+                    <div>
+                        <button id="submit_name">Submit</button>
+                    </div>
+                </form>
             </div>
-
-            <form id="player_config">
-                <div>
-                    <h2 style="text-align: center;">Player Configuration</h2>
-                </div>
-                <div>
-                    {# Here, labels are just so PyCharm stops yelling at me. An actual label here looks ugly #}
-                    <label for="player_name"></label>
-                    <label for="player_color"></label>
-
-                    <input type="text" id="player_name" placeholder="Name" autocomplete="off" required>
-                    <input type="color" id="player_color">
-                </div>
-                <div>
-                    <button id="submit_name">Submit</button>
-                </div>
-            </form>
         </div>
     </div>
 </body>

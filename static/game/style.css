@@ -8,6 +8,7 @@
 
 
 :root {
+    --number-button-color: rgba(49, 123, 171, 0.5);
     --won-color: rgba(162, 231, 201, 0.52);
     --line-color: #0c222b;
     --thick-line-color: #000000;
@@ -226,8 +227,8 @@ button#submit_name:active {
 
     margin: 5px;
 
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
 }
 
 .img-button:hover {
@@ -238,4 +239,60 @@ button#submit_name:active {
 .img-button:active {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5) inset;
     background-color: var(--super-accented-background-color);
+}
+
+#player-section {
+    display: flex;
+    flex-direction: column;
+}
+
+#number-selection {
+    margin-top: 5vw;
+    display: none;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    font-size: 28px;
+}
+
+.number {
+    user-select: none;
+    background-color: var(--number-button-color);
+    border: var(--line-color) solid 2px;
+    border-radius: 25%;
+    width: 8vw;
+    height: 8vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Mobile support */
+@media (max-width: 900px) {
+    #number-selection {
+        display: flex;
+    }
+
+    #player-section {
+        flex-direction: column-reverse;
+    }
+
+    .container {
+        padding: 10px;
+        height: 100vw;
+    }
+
+    #board {
+        height: min(80vh, 80vw);
+    }
+
+    .box {
+        height: calc(min(80vh / 9, 80vw / 9));
+        width: calc(min(80vh / 9, 80vw / 9));
+    }
+
+    /*.img-button {*/
+    /*    width: 50px;*/
+    /*    height: 50px;*/
+    /*}*/
 }
