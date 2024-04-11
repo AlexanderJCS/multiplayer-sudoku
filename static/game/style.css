@@ -77,8 +77,6 @@ h1 {
     height: min(70vh, 70vw);
     display: grid;
     grid-template-columns: repeat(9, auto);
-    grid-column-gap: 0;
-    flex-wrap: wrap;
     margin-top: min(5vh, 5vw);
 }
 
@@ -174,16 +172,16 @@ button#submit_name:active {
 }
 
 .box {
-    height: calc(min(70vh / 9));
-    width: calc(min(70vh / 9));
+    height: calc(min(70vh / 9, 70vw / 9));
+    width: calc(min(70vh / 9, 70vw / 9));
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--line-color);
     user-select: none;
-    border: min(0.3vw, 0.3vh) solid var(--line-color);
-    margin: min(0.1vw, 0.1vh);
-    border-radius: 10px;
+    border: 2px solid var(--line-color);
+    margin: 2px;
+    border-radius: calc(min(70vh / 45, 70vw / 45));
     transition-duration: 0.1s;
     transition-property: background-color, border-color, box-shadow;
     word-wrap: break-word;
@@ -201,11 +199,11 @@ button#submit_name:active {
 }
 
 .box:nth-child(3n) {
-    margin-right: min(1vw, 1vh);
+    margin-right: 15px;
 }
 
 .box:nth-child(27n) {
-    margin-bottom: min(1vw, 1vh);
+    margin-bottom: 15px;
 }
 
 /* Override transition for text properties */
