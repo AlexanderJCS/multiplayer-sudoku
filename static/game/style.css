@@ -109,11 +109,6 @@ h1 {
     font-weight: inherit;
 }
 
-#player_config {
-    display: flex;
-    flex-direction: column;
-}
-
 input[type="text"], input[type="color"], button#submit_name {
     flex: 1;
     font-size: 16px;
@@ -125,17 +120,19 @@ input[type="text"], input[type="color"], button#submit_name {
 }
 
 input[type="text"] {
+    width: 75%;
     padding: 10px;
     margin-right: 10px;
     background-color: var(--background);
     font-family: "Poppins", sans-serif;
-
 }
 
 input[type="color"] {
+    width: 20%;
+
     /* Fix the color picker being too high */
     position: relative;
-    transform: translateY(23%);
+    transform: translateY(30%);
 }
 
 input[type="text"]:focus {
