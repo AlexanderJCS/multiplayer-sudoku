@@ -43,7 +43,7 @@ h1 {
 
 .players {
     margin: 3vh auto;
-    font-size: 25px;
+    font-size: 1.5rem;
     height: 40vh;
     width: 100%;
     overflow: auto;
@@ -110,13 +110,17 @@ h1 {
     font-weight: inherit;
 }
 
+#player-section {
+    font-size: 16px;
+}
+
 input[type="text"], input[type="color"], button#submit_name {
     flex: 1;
-    font-size: 16px;
+    font-size: 100%;
     border-radius: 10px;
     margin-bottom: 10px;
     border: 2px solid var(--line-color);
-    height: 40px;
+    height: 2.5em;
     font-family: "Poppins", sans-serif;
 }
 
@@ -152,7 +156,6 @@ button#submit_name {
 button#submit_name:hover {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
     background-color: var(--accented-background-color);
-
 }
 
 button#submit_name:active {
@@ -275,6 +278,7 @@ button#submit_name:active {
 
     #player-section {
         flex-direction: column-reverse;
+        font-size: 14px;
     }
 
     .container {
@@ -290,9 +294,4 @@ button#submit_name:active {
         height: calc(min(80vh / 9, 80vw / 9));
         width: calc(min(80vh / 9, 80vw / 9));
     }
-
-    /*.img-button {*/
-    /*    width: 50px;*/
-    /*    height: 50px;*/
-    /*}*/
 }
