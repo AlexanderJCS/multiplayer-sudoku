@@ -78,6 +78,17 @@ function submitConfig(event) {
 }
 
 
+function numberClicked() {
+    let num = parseInt(this.innerText[this.innerText.length - 1]);
+    if (isNaN(num)) {
+        num = 0;
+    }
+
+    onKeyPress({key: num.toString()});
+}
+
+
+
 function events() {
     genGrid();
     updateBoard();
@@ -85,6 +96,10 @@ function events() {
     getBoxes().forEach((box) => {
         box.addEventListener("mousedown", boxClicked);
     })
+
+    elementsByClass("number").forEach((num) => {
+        num.addEventListener("mousedown", numberClicked);
+    });
 
     // Add HTML event listerners
     document.getElementById("toggle-pencil").addEventListener("mousedown", togglePencil);
