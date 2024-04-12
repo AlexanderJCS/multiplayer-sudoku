@@ -1,10 +1,16 @@
-from flask_socketio import join_room, leave_room
-
 from dataclasses import dataclass
+
+
+import threading
 import string
+
+import flask
+import flask_socketio as sio
 
 from player_list import PlayerList
 from board import Board
+
+import consts
 
 
 @dataclass
@@ -33,11 +39,12 @@ class Games:
     def has_game(self, game_id) -> bool:
         return game_id in self.id_games_map
 
-    def add_game(self, game_id: str):
+    def add_game(self, game_id: str, flask_app: flask.Flask):
         if self.id_games_map.get(game_id):
             return  # exit silently
 
         self.id_games_map[game_id] = Game(PlayerList(), Board(), game_id)
+        threading.Timer(consts.CONFIG["game"]["timeout"], self.remove_game, args=[flask_app, game_id]).start()
 
     def add_player(self, player_sid: str, game_id: str):
         if not self.id_games_map.get(game_id):
@@ -45,10 +52,10 @@ class Games:
 
         self.players_game_id_map[player_sid] = game_id
         self.game_from_player(player_sid).player_list.add_player(player_sid)  # add the player to the player list
-        join_room(game_id, sid=player_sid)
+        sio.join_room(game_id, sid=player_sid)
 
     def remove_player(self, player_sid):
-        leave_room(self.players_game_id_map[player_sid], sid=player_sid)
+        sio.leave_room(self.players_game_id_map[player_sid], sid=player_sid)
         del self.players_game_id_map[player_sid]
 
     def game_from_player(self, player_sid) -> Game | None:
@@ -72,3 +79,9 @@ class Games:
         """
         
         return self.id_games_map.get(game_id)
+
+    def remove_game(self, flask_app: flask.Flask, room_id: str):
+        print(f"Removing game {room_id} due to time limit")
+        
+        game = self.id_games_map.pop(room_id)
+        game.player_list.close_room(flask_app, room_id)

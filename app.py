@@ -4,11 +4,7 @@ from flask_socketio import SocketIO, emit
 from games import Games
 import gen_key
 
-import tomllib
-
-
-with open("config.toml", "rb") as f:
-    CONFIG = tomllib.load(f)
+from consts import CONFIG
 
 
 app = Flask(__name__)
@@ -38,7 +34,7 @@ def index():
 
 @app.route("/<game_code>")
 def game_code_req(game_code):
-    games.add_game(game_code)
+    games.add_game(game_code, app)
     return render_template("game.html", websocket_connection_url=CONFIG["server"]["websocket_connection_url"])
 
 
