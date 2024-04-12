@@ -320,4 +320,16 @@ button#submit_name:active {
     #error-msg {
         font-size: 100%;
     }
+
+    .box {
+        margin: 1px;
+    }
+
+    .box:nth-child(3n) {
+        margin-right: 8px;
+    }
+
+    .box:nth-child(27n) {
+        margin-bottom: 8px;
+    }
 }
