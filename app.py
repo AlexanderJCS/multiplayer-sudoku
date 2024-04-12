@@ -35,7 +35,11 @@ def index():
 @app.route("/<game_code>")
 def game_code_req(game_code):
     games.add_game(game_code, app)
-    return render_template("game.html", websocket_connection_url=CONFIG["server"]["websocket_connection_url"])
+    return render_template(
+        "game.html",
+        websocket_connection_url=CONFIG["server"]["websocket_connection_url"],
+        game_id=game_code
+    )
 
 
 @socketio.on("update_board")

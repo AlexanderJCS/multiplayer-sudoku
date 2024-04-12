@@ -48,6 +48,7 @@ class PlayerList:
         # This is validated by this StackOverflow forum:
         # https://stackoverflow.com/questions/31647081/flask-python-and-socket-io-multithreading-app-is-giving-me-runtimeerror-work
         with flask_app.test_request_context(f"/{room_id}"):
+            sio.emit("room_timeout", to=room_id, namespace=f"/")
             sio.close_room(room_id, namespace=f"/")
             
             for player in self.players.keys():

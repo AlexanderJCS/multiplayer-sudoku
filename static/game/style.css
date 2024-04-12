@@ -212,6 +212,28 @@ button#submit_name:active {
     transition-duration: 0s !important;
 }
 
+.not-bold {
+    font-weight: normal;
+}
+
+#error-msg {
+    color: red;
+    font-size: 140%;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.top-page {
+    & h1 {
+        font-size: 180%;
+        text-transform: none;  /* make text its original case instead of full uppercase */
+    }
+
+    & h2 {
+        font-size: 140%;
+    }
+}
+
 .main-container {
     text-align: center;
     box-sizing: border-box;
@@ -293,5 +315,9 @@ button#submit_name:active {
     .box {
         height: calc(min(80vh / 9, 80vw / 9));
         width: calc(min(80vh / 9, 80vw / 9));
+    }
+
+    #error-msg {
+        font-size: 100%;
     }
 }

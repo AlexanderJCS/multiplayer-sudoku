@@ -88,6 +88,15 @@ function numberClicked() {
 }
 
 
+function roomTimeout() {
+    document.getElementById("game-id-display").innerText = "";
+    document.getElementById("error-msg").innerText = "Room has timed out.\nYou may continue playing offline or refresh the page to start a new game online";
+
+    elementsByClass("players").forEach((playerList) => {
+        playerList.innerHTML = "";
+    });
+}
+
 
 function events() {
     genGrid();
@@ -117,9 +126,20 @@ function events() {
         let gameCode = window.location.pathname.split('/')[1];
         console.log("Joining game: " + gameCode);
         socket.emit("join_game", gameCode);
+
+        document.getElementById("game-id-display").innerHTML = "Game ID: " + gameCode;
+        document.getElementById("error-msg").innerText = "";
     });
 
+    socket.on("room_timeout", roomTimeout);
+
     socket.on("disconnect", () => {
+        if (document.getElementById("error-msg").innerText === "") {
+            // TODO: remove duplicate code with roomTimeout()
+            document.getElementById("game-id-display").innerText = "";
+            document.getElementById("error-msg").innerText = "Unexpectedly disconnected from server.\nYou may continue playing offline or refresh the page to retry connecting.";
+        }
+
         console.log("Disconnected from server");
     });
 
