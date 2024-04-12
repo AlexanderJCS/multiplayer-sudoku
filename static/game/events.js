@@ -114,7 +114,7 @@ function events() {
     document.getElementById("toggle-pencil").addEventListener("mousedown", togglePencil);
     document.getElementById("toggle-view-pencil").addEventListener("mousedown", toggleViewPencil);
 
-    document.getElementById('player_config').addEventListener('submit', submitConfig);
+    document.getElementById("player_config").addEventListener("submit", submitConfig);
 
     // Add keyboard event listeners
     document.addEventListener("keydown", onKeyPress);
@@ -127,7 +127,7 @@ function events() {
         console.log("Joining game: " + gameCode);
         socket.emit("join_game", gameCode);
 
-        document.getElementById("game-id-display").innerHTML = "Game ID: " + gameCode;
+        document.getElementById("game-id-display").innerHTML = `Game ID: <span class="not-bold">${gameCode}</span>`;
         document.getElementById("error-msg").innerText = "";
     });
 
