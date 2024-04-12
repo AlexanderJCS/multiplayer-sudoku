@@ -114,7 +114,7 @@ def handle_join_game(game_code):
 def update_player(player_data):
     if "name" in player_data and "color" in player_data \
             and isinstance(player_data["name"], str) and isinstance(player_data["color"], str) \
-            and len(player_data["name"]) > 0:
+            and 0 < len(player_data["name"]) < 25:
         game = games.game_from_player(request.sid)
         
         if game is None:  # player did not properly connect to a game
