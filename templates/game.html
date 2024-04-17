@@ -15,6 +15,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="../static/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../static/favicon/favicon-16x16.png">
     <link rel="manifest" href="../static/favicon/site.webmanifest">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 </head>
 <body>
     <script>
@@ -28,11 +29,16 @@
     <script src="../static/game/board_highlighting.js"></script>
     <script src="../static/game/board_controls.js"></script>
     <script src="../static/game/events.js"></script>
+    <script src="../static/game/button_events.js"></script>
 
     <section class="main-container">
         <section class="top-page">
             <h1>Multiplayer Sudoku</h1>
-            <h2 id="game-id-display">Game ID: <span class="not-bold">Connecting...</span></h2>
+            <span>
+                <h2 id="game-id-display">Game ID: <span class="not-bold" id="game-id">Connecting...</span></h2>
+                <button id="copy-name-button" onclick="copyGameId()"><span class="material-symbols-outlined" id="copy-button-icon">content_copy</span></button>
+
+            </span>
             <span id="error-msg"></span>
         </section>
 

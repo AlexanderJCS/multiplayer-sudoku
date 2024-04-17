@@ -127,7 +127,7 @@ function events() {
         console.log("Joining game: " + gameCode);
         socket.emit("join_game", gameCode);
 
-        document.getElementById("game-id-display").innerHTML = `Game ID: <span class="not-bold">${gameCode}</span>`;
+        document.getElementById("game-id").innerText = gameCode;
         document.getElementById("error-msg").innerText = "";
     });
 
