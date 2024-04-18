@@ -34,12 +34,17 @@
     <section class="main-container">
         <section class="top-page">
             <h1>Multiplayer Sudoku</h1>
-            <span>
+            <div>
                 <h2 id="game-id-display">Game ID: <span class="not-bold" id="game-id">Connecting...</span></h2>
                 <button id="copy-name-button" onclick="copyGameId()"><span class="material-symbols-outlined" id="copy-button-icon">content_copy</span></button>
+            </div>
 
-            </span>
-            <span id="error-msg"></span>
+            <div id="error-msg"></div>
+
+            <div id="time-left-display">
+                <h3 style="display: inline">Time Left:</h3>
+                <span id="time-left" style="display: inline">24h</span>
+            </div>
         </section>
 
         <section class="container">

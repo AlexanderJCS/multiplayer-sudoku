@@ -23,11 +23,13 @@
 }
 
 .material-symbols-outlined {
-  font-variation-settings:
-  "FILL" 0,
-  "wght" 400,
-  "GRAD" 0,
-  "opsz" 24
+    font-variation-settings:
+    "FILL" 0,
+    "wght" 400,
+    "GRAD" 0,
+    "opsz" 24;
+
+    transform: translateY(13%);  /* prevent the icons from appearing too high */
 }
 
 #game-id-display {
@@ -36,14 +38,12 @@
 
 button#copy-name-button {
     display: none;  /* change this to inline when the button is added */
-    margin-left: 10px;
     border-radius: 10%;
     cursor: pointer;
     background-color: var(--background);
     outline: none;
     box-shadow: none;
     border: none;
-    transform: translateY(13%);  /* prevent the button from appearing too high */
 }
 
 button#copy-name:active {
@@ -63,8 +63,8 @@ h1 {
 
 .container {
     display: inline-block;
-    padding: 40px;
-    height: 100vh;
+    padding: 2vh;
+    height: 85vh;
     background-color: var(--background);
     vertical-align: middle;
 }
