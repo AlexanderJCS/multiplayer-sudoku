@@ -89,8 +89,7 @@ function numberClicked() {
 
 
 function roomTimeout() {
-    document.getElementById("game-id-display").innerText = "";
-    document.getElementById("error-msg").innerText = "Room has timed out.\nYou may continue playing offline or refresh the page to start a new game online";
+    showError("The room timed out.\nYou may continue playing offline or refresh the page to start a new game online");
 
     elementsByClass("players").forEach((playerList) => {
         playerList.innerHTML = "";
@@ -134,12 +133,7 @@ function events() {
     socket.on("room_timeout", roomTimeout);
 
     socket.on("disconnect", () => {
-        if (document.getElementById("error-msg").innerText === "") {
-            // TODO: remove duplicate code with roomTimeout()
-            document.getElementById("game-id-display").innerText = "";
-            document.getElementById("error-msg").innerText = "Unexpectedly disconnected from server.\nYou may continue playing offline or refresh the page to retry connecting.";
-        }
-
+        showError("Unexpectedly disconnected from the server.\nYou may continue playing offline or refresh the page to retry connecting.");
         console.log("Disconnected from server");
     });
 

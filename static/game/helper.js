@@ -50,3 +50,14 @@ function getRowCol(boxID) {
     let col = boxID % 9;
     return [row, col];
 }
+
+
+function showError(errorMsg) {
+    if (document.getElementById("error-msg").innerText !== "") {
+        return;  // there is already an error displayed
+    }
+
+    document.getElementById("copy-name-button").style.display = "none";
+    document.getElementById("game-id-display").innerText = "";
+    document.getElementById("error-msg").innerText = errorMsg;
+}
