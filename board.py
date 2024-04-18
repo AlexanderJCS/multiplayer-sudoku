@@ -30,6 +30,8 @@ class Board:
             return -consts.CONFIG["game"]["points_multiplier"]
         if self.board[request["loc"]] == self.correct_board[request["loc"]]:
             return consts.CONFIG["game"]["points_multiplier"]
+        else:  # if the value is incorrect
+            return -consts.CONFIG["game"]["points_multiplier"] // 2
 
     def pencil_mark(self, message: dict) -> None:
         """

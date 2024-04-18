@@ -59,7 +59,9 @@ def handle_message(message):
         return
 
     points = game.board.update_from_request(message)
-    game.player_list.get_player(request.sid).points += points
+    
+    player = game.player_list.get_player(request.sid)
+    player.points = max(0, player.points + points)  # ensure points are not negative
     
     emit("update_board", message, to=game.id)
     emit("update_player", game.player_list.get_player(request.sid).__dict__, to=game.id)
