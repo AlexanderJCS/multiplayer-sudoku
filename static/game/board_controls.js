@@ -105,7 +105,9 @@ function updatePlayerList() {
             box.style.borderColor = "";
         }
 
-        for (let player of Object.values(players)) {
+        let sorted = Object.values(players).sort((a, b) => b.points - a.points);
+
+        for (let player of sorted) {
             // Create the player object in the player list
             let playerDiv = document.createElement("div");
             playerDiv.classList.add("player");
