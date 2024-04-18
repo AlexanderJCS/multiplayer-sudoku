@@ -128,6 +128,7 @@ function events() {
 
         document.getElementById("game-id").innerText = gameCode;
         document.getElementById("error-msg").innerText = "";
+        document.getElementById("copy-name-button").style.display = "inline";
     });
 
     socket.on("room_timeout", roomTimeout);

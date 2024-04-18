@@ -35,7 +35,7 @@
 }
 
 button#copy-name-button {
-    display: inline;
+    display: none;  /* change this to inline when the button is added */
     margin-left: 10px;
     border-radius: 10%;
     cursor: pointer;
