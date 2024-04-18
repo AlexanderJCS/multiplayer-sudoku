@@ -107,25 +107,24 @@ h1 {
     margin: 3vh auto;
     font-size: 1.5rem;
     height: 40vh;
-    width: 100%;
-    overflow: auto;
+    width: 20vw;
     padding: 10px;
 }
 
 .player {
     display: flex;
     text-align: left;
-    flex-direction: column;
     background-color: var(--background);
     margin-bottom: 10px;
-}
 
-.player {
-    display: inline-block;
+    /* reference all sub-elements */
+    & * {
+        display: inline-block;
+    }
 }
 
 .color {
-    display: inherit;
+    flex-shrink: 0;
     width: 25px;
     height: 25px;
     margin-right: 5px;
@@ -133,13 +132,14 @@ h1 {
 }
 
 .name {
-    display: inherit;
-    margin-top: -30px;
     transform: translateY(-15%);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .points {
-    display: inherit;
+    flex-shrink: 0;
     transform: translateY(-15%);
     margin-right: 10px;
 
