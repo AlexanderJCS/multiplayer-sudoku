@@ -67,6 +67,11 @@ h1 {
     height: 85vh;
     background-color: var(--background);
     vertical-align: middle;
+
+    @media (max-width: 900px) {
+        padding: 0;
+        margin: 0;
+    }
 }
 
 .players {
@@ -299,8 +304,7 @@ button#submit_name:active {
 }
 
 #number-selection {
-    margin-top: 5vw;
-    display: none;
+    display: none;  /* only display on mobile */
     justify-content: space-around;
     align-items: center;
     width: 100%;
