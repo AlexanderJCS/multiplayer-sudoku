@@ -113,7 +113,7 @@ function updatePlayerList() {
             // Points div
             let pointsDiv = document.createElement("div");
             pointsDiv.classList.add("points");
-            pointsDiv.innerHTML = `<span class="material-icons-outlined">star</span>4`;
+            pointsDiv.innerHTML = `<span class="material-icons-outlined">star</span>${player.points}`;
             playerDiv.appendChild(pointsDiv);
 
             // Color div

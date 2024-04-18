@@ -1,3 +1,4 @@
+import consts
 import puzzle_loader as pl
 import copy
 
@@ -10,16 +11,25 @@ class Board:
         
         print(f"Generated board: {self.board}, Correct board: {self.correct_board}")
     
-    def update_from_request(self, request) -> None:
+    def update_from_request(self, request) -> int:
         """
         Update the board from a request. Mutates the current board. Assumes the request is already sanitized (i.e.,
         correct data types, correct keys, etc.)
         
         :param request: A request, containing the loc and value keys
+        :return The number of points that should be awarded to the player
         """
 
         self.pencil_board[request["loc"]] = ""
+        original_value = self.board[request["loc"]]
         self.board[request["loc"]] = request["value"]
+        
+        if original_value == request["value"]:
+            return 0
+        if original_value == self.correct_board[request["loc"]]:  # remove points if players change correct to incorrect
+            return -consts.CONFIG["game"]["points_multiplier"]
+        if self.board[request["loc"]] == self.correct_board[request["loc"]]:
+            return consts.CONFIG["game"]["points_multiplier"]
 
     def pencil_mark(self, message: dict) -> None:
         """

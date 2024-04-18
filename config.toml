@@ -7,3 +7,4 @@ cors_allowed_origins = ["http://127.0.0.1:5000"]
 
 [game]
 timeout = 86400  # seconds before the room deletes itself
+points_multiplier = 10  # points per correct answer

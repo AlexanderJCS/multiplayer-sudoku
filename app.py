@@ -58,8 +58,11 @@ def handle_message(message):
     if game is None:  # player did not properly connect to a game
         return
 
-    game.board.update_from_request(message)
+    points = game.board.update_from_request(message)
+    game.player_list.get_player(request.sid).points += points
+    
     emit("update_board", message, to=game.id)
+    emit("update_player", game.player_list.get_player(request.sid).__dict__, to=game.id)
 
 
 @socketio.on("pencil_mark")

@@ -60,6 +60,7 @@ class Player:
     name: str
     hashed_sid: str
     color: str = None
+    points: int = 0
     pos: int = -1
 
     def __post_init__(self):
