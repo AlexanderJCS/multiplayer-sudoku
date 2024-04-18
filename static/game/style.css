@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 *{
     padding: 0;
@@ -31,6 +31,35 @@
 
     transform: translateY(13%);  /* prevent the icons from appearing too high */
 }
+
+.material-icons-outlined {
+    font-family: "Material Icons", serif;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;  /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+
+    /* Support for IE. */
+    font-feature-settings: "liga";
+
+    /* Do not highlight the icon when clicked */
+    user-select: none;
+}
+
 
 #game-id-display {
     display: inline;
@@ -91,21 +120,34 @@ h1 {
     margin-bottom: 10px;
 }
 
-.color {
+.player {
     display: inline-block;
+}
+
+.color {
+    display: inherit;
     width: 25px;
     height: 25px;
     margin-right: 5px;
     border-radius: 25%;
-    vertical-align: middle;
 }
 
 .name {
+    display: inherit;
     margin-top: -30px;
-    margin-left: 40px;
-    display: inline-block;
-    vertical-align: top;
+    transform: translateY(-15%);
 }
+
+.points {
+    display: inherit;
+    transform: translateY(-15%);
+    margin-right: 10px;
+
+    & .material-icons-outlined {
+        transform: translateY(15%);
+    }
+}
+
 
 #board {
     height: min(70vh, 70vw);

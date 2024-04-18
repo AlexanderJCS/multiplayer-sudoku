@@ -110,11 +110,19 @@ function updatePlayerList() {
             let playerDiv = document.createElement("div");
             playerDiv.classList.add("player");
 
+            // Points div
+            let pointsDiv = document.createElement("div");
+            pointsDiv.classList.add("points");
+            pointsDiv.innerHTML = `<span class="material-icons-outlined">star</span>4`;
+            playerDiv.appendChild(pointsDiv);
+
+            // Color div
             let colorDiv = document.createElement("div");
             colorDiv.classList.add("color");
             colorDiv.style.backgroundColor = player.color;
             playerDiv.appendChild(colorDiv);
 
+            // Name div
             let nameDiv = document.createElement("div");
             nameDiv.classList.add("name");
             nameDiv.innerText = player.name;
