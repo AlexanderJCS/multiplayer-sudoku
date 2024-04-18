@@ -203,13 +203,13 @@ input[type="text"], input[type="color"], button#submit_name {
 input[type="text"] {
     width: 75%;
     padding: 10px;
-    margin-right: 10px;
+    margin-right: 2.5%;
     background-color: var(--background);
     font-family: "Poppins", sans-serif;
 }
 
 input[type="color"] {
-    width: 20%;
+    width: 15%;
 
     /* Fix the color picker being too high */
     position: relative;
@@ -222,7 +222,7 @@ input[type="text"]:focus {
 }
 
 button#submit_name {
-    width: 100%;
+    width: 94%;
     background-color: var(--background);
     cursor: pointer;
     transition-duration: 0.2s;
