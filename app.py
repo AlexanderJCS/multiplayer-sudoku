@@ -107,6 +107,7 @@ def handle_join_game(game_code):
 
     emit("board_data", game.board.get_init_data())
     emit("your_color", game.player_list.get_player(request.sid).color)
+    emit("timeout_time", game.timeout_time, to=request.sid)
     emit("players", game.player_list.as_dict(), to=game.id)
 
 

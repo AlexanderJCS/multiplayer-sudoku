@@ -133,6 +133,8 @@ function events() {
 
     socket.on("room_timeout", roomTimeout);
 
+    socket.on("timeout_time", (timeoutTime) => {timeoutTimer(timeoutTime)});
+
     socket.on("disconnect", () => {
         showError("Unexpectedly disconnected from the server.\nYou may continue playing offline or refresh the page to retry connecting.");
         console.log("Disconnected from server");

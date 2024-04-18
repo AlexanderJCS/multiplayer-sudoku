@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 
-
 import threading
 import string
+import time
 
 import flask
 import flask_socketio as sio
@@ -18,6 +18,7 @@ class Game:
     player_list: PlayerList
     board: Board
     id: str
+    timeout_time: int
 
 
 class Games:
@@ -43,7 +44,13 @@ class Games:
         if self.id_games_map.get(game_id):
             return  # exit silently
 
-        self.id_games_map[game_id] = Game(PlayerList(), Board(), game_id)
+        self.id_games_map[game_id] = Game(
+            PlayerList(),
+            Board(),
+            game_id,
+            time.time() + consts.CONFIG["game"]["timeout"]
+        )
+        
         threading.Timer(consts.CONFIG["game"]["timeout"], self.remove_game, args=[flask_app, game_id]).start()
 
     def add_player(self, player_sid: str, game_id: str):
