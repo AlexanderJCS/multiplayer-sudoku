@@ -92,16 +92,12 @@ h1 {
 }
 
 .container {
+    overflow: hidden;
     display: inline-block;
     padding: 2vh;
     height: 85vh;
     background-color: var(--background);
     vertical-align: middle;
-
-    @media (max-width: 900px) {
-        padding: 0;
-        margin: 0;
-    }
 }
 
 .players {
@@ -378,8 +374,21 @@ button#submit_name:active {
     }
 
     .container {
-        padding: 10px;
         height: 100vw;
+        padding: 0;
+        margin: 0;
+    }
+
+    #controls-players-container {
+        margin-top: 30px;
+    }
+
+    .players {
+        width: 90vw;
+    }
+
+    #controls-players-container {
+        height: auto;
     }
 
     #board {
