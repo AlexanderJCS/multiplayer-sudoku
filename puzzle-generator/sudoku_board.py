@@ -108,13 +108,15 @@ class Board:
                     random.shuffle(order)
                 
                 for num in order:
-                    if self.is_valid(x, y, num):
-                        self.board[y][x] = num
-                        
-                        if self.solve(rand_gen=rand_gen):
-                            return True
-                        
-                        self.board[y][x] = 0
+                    if not self.is_valid(x, y, num):
+                        continue
+                    
+                    self.board[y][x] = num
+                    
+                    if self.solve(rand_gen=rand_gen):
+                        return True
+                    
+                    self.board[y][x] = 0
                 
                 return False
         
