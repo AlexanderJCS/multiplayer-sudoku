@@ -114,13 +114,13 @@ class Board:
                     self.board[y][x] = num
                     
                     if self.solve(rand_gen=rand_gen):
-                        return True
+                        return True  # pass the solved board up the stack
                     
                     self.board[y][x] = 0
                 
-                return False
+                return False  # only occurs if no valid number for the position was found
         
-        return True
+        return True  # only occurs if the board is solved
     
     def get_subsquare(self, x, y) -> list[int]:
         """
