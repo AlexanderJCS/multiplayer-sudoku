@@ -22,17 +22,14 @@
 </head>
 <body>
     <script>
-        /**
-         * The socket that connects to the server.
-         */
-        let socket = io.connect("{{ websocket_connection_url }}");
+        const SERVER_IP = "{{ websocket_connection_url }}";
     </script>
 
     <script src="../static/game/helper.js"></script>
     <script src="../static/game/board_highlighting.js"></script>
     <script src="../static/game/board_controls.js"></script>
     <script src="../static/game/timeout_timer.js"></script>
-    <script src="../static/game/events.js"></script>
+    <script src="../static/game/init.js"></script>
     <script src="../static/game/button_events.js"></script>
 
     <section class="main-container">

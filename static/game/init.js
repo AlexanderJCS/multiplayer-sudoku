@@ -1,3 +1,5 @@
+let socket;
+
 /**
  * Used at initialization. Generates the 9x9 grid of boxes.
  */
@@ -97,7 +99,7 @@ function roomTimeout() {
 }
 
 
-function events() {
+function init() {
     genGrid();
     updateBoard();
 
@@ -117,6 +119,8 @@ function events() {
 
     // Add keyboard event listeners
     document.addEventListener("keydown", onKeyPress);
+
+    socket = io.connect(SERVER_IP);  // {{ websocket_connection_url }} is replaced by the server
 
     // Add socket event listeners
     socket.on("connect", () => {
@@ -204,4 +208,4 @@ function events() {
     });
 }
 
-window.onload = events;
+document.addEventListener("DOMContentLoaded", init);
