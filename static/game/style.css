@@ -197,24 +197,28 @@ input[type="text"], input[type="color"], button#submit_name {
 }
 
 input[type="text"] {
+    flex: 0 0 auto;
     width: 75%;
     padding: 10px;
     margin-right: 2.5%;
     background-color: var(--background);
-    font-family: "Poppins", sans-serif;
 }
 
 input[type="color"] {
+    flex: 0 0 auto;
     width: 15%;
-
-    /* Fix the color picker being too high */
-    position: relative;
-    transform: translateY(30%);
 }
 
 input[type="text"]:focus {
     outline: none;
     background-color: var(--accented-background-color);
+}
+
+#name-color-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
 }
 
 button#submit_name {
