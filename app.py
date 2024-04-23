@@ -16,7 +16,7 @@ try:
 except FileNotFoundError:
     print(
         "\nERROR: Secret key file not found.\n"
-        "Generating a temporary secret key for this session. It is highly to set a permanent key.\n"
+        "Generating a temporary secret key for this session. It is highly recommended to set a permanent key.\n"
         "Please run the gen_key.py script to generate a permenant key"
         "\n"
     )
