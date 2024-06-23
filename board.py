@@ -8,8 +8,6 @@ class Board:
         self.pencil_board: list[str] = ["" for _ in range(81)]
         self.board, self.correct_board = pl.get_random_puzzle()
         self.original_board = copy.deepcopy(self.board)
-        
-        print(f"Generated board: {self.board}, Correct board: {self.correct_board}")
     
     def update_from_request(self, request) -> int:
         """

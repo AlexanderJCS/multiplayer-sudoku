@@ -51,6 +51,8 @@ class Games:
             time.time() + consts.CONFIG["game"]["timeout"]
         )
         
+        consts.LOGGER.info(f"Created game ID: {game_id}")
+        
         threading.Timer(consts.CONFIG["game"]["timeout"], self.remove_game, args=[flask_app, game_id]).start()
 
     def add_player(self, player_sid: str, game_id: str):
@@ -88,7 +90,7 @@ class Games:
         return self.id_games_map.get(game_id)
 
     def remove_game(self, flask_app: flask.Flask, room_id: str):
-        print(f"Removing game {room_id} due to time limit")
+        consts.LOGGER.info(f"Removing game {room_id} due to timeout")
         
         game = self.id_games_map.pop(room_id)
         game.player_list.close_room(flask_app, room_id)

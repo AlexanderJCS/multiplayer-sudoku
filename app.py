@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 from flask_socketio import SocketIO, emit
 
+import consts
 from games import Games
 import gen_key
 
@@ -14,8 +15,8 @@ try:
     with open("secret_key.txt", "r") as f:
         app.config["SECRET_KEY"] = f.read()
 except FileNotFoundError:
-    print(
-        "\nERROR: Secret key file not found.\n"
+    consts.LOGGER.warn(
+        "\nSecret key file not found.\n"
         "Generating a temporary secret key for this session. It is highly recommended to set a permanent key.\n"
         "Please run the gen_key.py script to generate a permenant key"
         "\n"
@@ -50,7 +51,7 @@ def handle_message(message):
             or message["loc"] < 0 or message["loc"] >= 81  # check bounds of location
             or message["value"] < 0 or message["value"] > 9):  # check bounds of value
 
-        print(f"ERROR: Invalid message received {message}")
+        consts.LOGGER.debug(f"Invalid message received {message}")
         return
 
     game = games.game_from_player(request.sid)
@@ -74,7 +75,7 @@ def handle_pencil_mark(message):
             or not isinstance(message["loc"], int) or not isinstance(message["value"], str)  # check data types of keys
             or message["loc"] < 0 or message["loc"] >= 81  # check bounds of location
             or (not message["value"].isdigit() and len(message) == 0) or "0" in message["value"]):
-        print(f"ERROR: Invalid pencilMark message received {message}")
+        consts.LOGGER.debug(f"Invalid pencilMark message received {message}")
         return
 
     game = games.game_from_player(request.sid)
@@ -88,7 +89,7 @@ def handle_pencil_mark(message):
 
 @socketio.on("disconnect")
 def handle_disconnect():
-    print(f"Received disconnection from {request.sid}")
+    consts.LOGGER.debug(f"Received disconnection from {request.sid}")
 
     game = games.game_from_player(request.sid)
 
@@ -101,10 +102,10 @@ def handle_disconnect():
 
 @socketio.on("join_game")
 def handle_join_game(game_code):
-    print(f"Received join_game request for code {game_code}")
+    consts.LOGGER.debug(f"Received join_game request for code {game_code}")
 
     if not games.has_game(game_code):
-        print(f"Client tried connecting to game {game_code} which does not exist")
+        consts.LOGGER.debug(f"Client tried connecting to game {game_code} which does not exist")
         return
 
     games.add_player(request.sid, game_code)
@@ -137,7 +138,7 @@ def handle_move_cursor(cursor_data):
             not (isinstance(cursor_data["pos"], int) or cursor_data["pos"] is None) \
             or cursor_data["pos"] < -1 \
             or cursor_data["pos"] >= 81:
-        print(f"Invalid cursor data: {cursor_data}")
+        consts.LOGGER.debug(f"Invalid cursor data: {cursor_data}")
     
     game = games.game_from_player(request.sid)
     
@@ -151,12 +152,12 @@ def handle_move_cursor(cursor_data):
 
 @socketio.on("connection_error")
 def handle_connection_error(message):
-    print(f"Received connection_error message: {message}")
+    consts.LOGGER.warn(f"Received connection_error message: {message}")
 
 
 @socketio.on("connect")
 def handle_connect():
-    print(f"Received connection from {request.sid}")
+    consts.LOGGER.debug(f"Received connection from {request.sid}")
 
 
 if __name__ == "__main__":

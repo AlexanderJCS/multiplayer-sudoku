@@ -7,4 +7,5 @@
 secret_key.txt
 __pycache__
 *.pyc
+*.log
 puzzle-generator/puzzles.db
