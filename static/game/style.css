@@ -95,7 +95,7 @@ h1 {
     overflow: hidden;
     display: inline-block;
     padding: 2vh;
-    height: 85vh;
+    height: 83vh;
     background-color: var(--background);
     vertical-align: middle;
 }
@@ -147,7 +147,7 @@ h1 {
 
 
 #board {
-    height: min(70vh, 70vw);
+    height: min(67vh, 67vw);
     display: grid;
     grid-template-columns: repeat(9, auto);
     margin-top: min(5vh, 5vw);
@@ -248,8 +248,8 @@ button#submit_name:active {
 }
 
 .box {
-    height: calc(min(70vh / 9, 70vw / 9));
-    width: calc(min(70vh / 9, 70vw / 9));
+    height: calc(min(67vh / 9, 67vw / 9));
+    width: calc(min(67vh / 9, 67vw / 9));
     display: flex;
     align-items: center;
     justify-content: center;
