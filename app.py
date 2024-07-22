@@ -105,7 +105,7 @@ def handle_join_game(game_code):
     consts.LOGGER.debug(f"Received join_game request for code {game_code}")
 
     if not games.has_game(game_code):
-        consts.LOGGER.debug(f"Client tried connecting to game {game_code} which does not exist")
+        consts.LOGGER.warn(f"Client tried connecting to game {game_code} which does not exist")
         return
 
     games.add_player(request.sid, game_code)

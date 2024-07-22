@@ -99,6 +99,12 @@ function roomTimeout() {
 }
 
 
+function getGameCode() {
+    let splitUrl =  window.location.pathname.split('/');
+    return splitUrl[splitUrl.length - 1];
+}
+
+
 function init() {
     genGrid();
     updateBoard();
@@ -126,7 +132,7 @@ function init() {
     socket.on("connect", () => {
         console.log("Connected to server");
 
-        let gameCode = window.location.pathname.split('/')[1];
+        let gameCode = getGameCode();
         console.log("Joining game: " + gameCode);
         socket.emit("join_game", gameCode);
 
