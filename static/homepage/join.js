@@ -6,5 +6,5 @@ document.getElementById('gameId').addEventListener('keydown', function(event) {
 });
 
 document.getElementById("join").addEventListener("click", function() {
-    window.location.href = "/" + document.getElementById("gameId").value;
+    window.location.href = "/game/" + document.getElementById("gameId").value;
 });

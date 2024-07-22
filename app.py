@@ -33,7 +33,7 @@ def index():
     return render_template("index.html")
 
 
-@app.route("/<game_code>")
+@app.route("/game/<game_code>")
 def game_code_req(game_code):
     games.add_game(game_code, app)
     return render_template(
